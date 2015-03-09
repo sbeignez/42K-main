@@ -1,8 +1,13 @@
 Django==1.7.6
+Pillow==2.7.0
 argparse==1.2.1
 django-allauth==0.19.1
+django-appconf==1.0.1
+django-countries==3.2
+django-geoposition==0.2.2
 oauthlib==0.7.2
 python-openid==2.2.5
 requests==2.5.3
 requests-oauthlib==0.4.2
+six==1.9.0
 wsgiref==0.1.2

@@ -1,10 +1,18 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
+from geoposition.fields import GeopositionField
+
 
 class UserProfile(models.Model):
+    ROLES = (
+        ('admin', 'Admin'),
+        ('photographer', 'Photographer'),
+        ('runner', 'Runner'),
+        ('tagger', 'Tagger'),
+    )
     user = models.OneToOneField(User, related_name='profile')
-    # add roles
+    role = models.CharField(max_length=15, choices=ROLES, default='runner')
 
     def __unicode__(self):
         return "{}'s profile".format(self.user.username)
@@ -28,3 +36,19 @@ class RaceEvent(models.Model):
     submitted_by = models.ForeignKey(User, related_name='%(class)s_submitted_by')
     validated_by = models.ForeignKey(User, related_name='%(class)s_validated_by')
     status = models.CharField(max_length=10, choices=STATUSES)
+
+
+class Photo(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.ImageField(default='')
+    date = models.DateTimeField()
+    location = GeopositionField(default='0.0,0.0')
+    uploaded_by = models.ForeignKey(User, related_name='%(class)s_uploaded_by')
+    race = models.ForeignKey(RaceEvent, related_name='%(class)s_race')
+
+
+class Tag(models.Model):
+    photo = models.ForeignKey(Photo, related_name='%(class)s_photo')
+    tagged_by = models.ForeignKey(User, related_name='%(class)s_tagged_by')
+    bib = models.CharField(max_length=10)
+    date = models.DateTimeField()
