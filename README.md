@@ -27,9 +27,24 @@ Run migrations:
 
     python manage.py migrate
 
-### Detailed instructions
+### Facebook login
 
-Take a look at the docs for a detailed instructions guide.
+First create a Django superuser:
+
+    python manage.py createsuperuser
+
+Then start the testserver:
+
+    python manage.py runserver
+    
+Go to <http://localhost:8000/admin/socialaccount/socialapp/add/>, 
+choose the Provider 'Facebook' and enter the following values:
+
+    Name: Facebook
+    Client id: 1582734425306832
+    Secret key: bc30440a1f440c296f1f60775883aac1
+    
+Now you can test the facebook login: <http://localhost:8000/accounts/login/>
 
 [0]: https://www.python.org/
 [1]: https://www.djangoproject.com/
