@@ -1,3 +1,5 @@
+import hashlib
+from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
@@ -11,11 +13,23 @@ class AppUser(models.Model):
         ('runner', 'Runner'),
         ('tagger', 'Tagger'),
     )
-    user = models.OneToOneField(User, related_name='user')
+    user = models.OneToOneField(User, related_name='app')
     role = models.CharField(max_length=15, choices=ROLES, default='runner')
+
+    def profile_image_url(self):
+        fb_uid = SocialAccount.objects.filter(user_id=self.user.id, provider='facebook')
+
+        if len(fb_uid):
+            return "http://graph.facebook.com/{}/picture?width=40&height=40".format(fb_uid[0].uid)
+
+        return "http://www.gravatar.com/avatar/{}?s=40".format(hashlib.md5(self.user.email).hexdigest())
+
 
     def __unicode__(self):
         return self.user.username
+
+User.app = property(lambda u: AppUser.objects.get_or_create(user=u)[0])
+
 
 
 class RaceEvent(models.Model):

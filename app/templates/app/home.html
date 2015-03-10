@@ -1,6 +1,5 @@
 {% extends "_layouts/base.html" %}
 {% load staticfiles %}
-
 {% block css %}
 {{block.super}}
 <style>
@@ -11,11 +10,8 @@
    }
 </style>
 {% endblock css %}
-
 {% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
-
 {% block page_class %}home-page{% endblock %}
-
 {% block content %}
 <div class="container">
    <!-- Example row of columns -->
@@ -23,12 +19,12 @@
       <div class='col-sm-6 col-xs-12'>
          <h3>Runners</h3>
          <h4>Find your photos</h4>
-         <a class="btn btn-primary btn-md" href="{% url 'runner_login' %}"><img src="{% static 'img/marathon runner.jpg' %}" width="100%"></a>
+         <a class="btn btn-primary btn-md" href="{% url 'runner' %}"><img src="{% static 'img/marathon runner.jpg' %}" width="100%"></a>
       </div>
       <div class='col-sm-6 col-xs-12'>
          <h3>Photographers</h3>
          <h4>Upload your photos</h4>
-         <a class="btn btn-primary btn-md" href="login-photographer.html">
+         <a class="btn btn-primary btn-md" href="{% url 'photographer' %}">
          <img src="{% static 'img/photographer.jpg' %}" width="100%">
          </a>
       </div>
