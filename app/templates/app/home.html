@@ -1,0 +1,75 @@
+{% extends "_layouts/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+{{block.super}}
+<style>
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+</style>
+{% endblock css %}
+
+{% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
+{% block page_class %}home-page{% endblock %}
+{% block content %}
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><b>42</b>K <small>Marathon photos</small></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+            <li><a href="search.html"><span class="glyphicon glyphicon-picture"></span> Runners</a></li>
+            <li><a href="upload.html"><span class="glyphicon glyphicon-camera"></span> Photographers</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Username</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="order.html"><span class="glyphicon glyphicon-shopping-cart"></span> Order</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Users</li>
+                <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a> </li>
+                <li><a href="login.html"><span class="glyphicon glyphicon-user"></span> Log-in / Log-out</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Admin</li>
+                <li><a href="tag-list.html"><span class="glyphicon glyphicon-tags"></span> Tag</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-right">
+
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+  <div class='col-sm-6 col-xs-12'>
+          <h3>Runners</h3>
+          <h4>Find your photos</h4>
+            <a class="btn btn-primary btn-md" href="login-runner.html"><img src="{% static 'img/marathon runner.jpg' %}" width="100%"></a>
+        </div>
+
+        <div class='col-sm-6 col-xs-12'>
+          <h3>Photographers</h3>
+          <h4>Upload your photos</h4>
+          <a class="btn btn-primary btn-md" href="login-photographer.html">
+            <img src="{% static 'img/photographer.jpg' %}" width="100%">
+          </a>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
