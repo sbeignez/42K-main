@@ -7,5 +7,8 @@ def home(request):
 def runner(request):
     return render(request, 'app/runner.html')
 
+def tagger(request):
+    return render(request, 'app/tagger.html')
+
 def photographer(request):
     return HttpResponse("TODO")
