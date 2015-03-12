@@ -1,7 +1,20 @@
   {% extends "_layouts/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+{{block.super}}
+<style>
+   /* Move down content because we have a fixed navbar that is 50px tall */
+   body {
+   padding-top: 50px;
+   padding-bottom: 20px;
+   }
+</style>
+{% endblock css %}
+{% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
+{% block page_class %}home-page{% endblock %}
 
   {% block content %}
-
   <div class='container'>
     <div class="row">
       <h1>Tag list <small>- 1/2</small></h1>
@@ -9,10 +22,6 @@
       <h2>Tag status</h2>
 
     </div>
-
-
-
-
     <!-- RESULTS-->    
     <div class="row">
       <div class="col-xs-12 col-sm-10 col-sm-offset-2">
