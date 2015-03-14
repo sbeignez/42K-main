@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django_countries',
     'geoposition',
+    'storages',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
