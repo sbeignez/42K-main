@@ -53,7 +53,7 @@ def order(request):
     payment = Payment.objects.create(
         variant='stripe',  # this is the variant from PAYMENT_VARIANTS
         description='Photo purchase',
-        total=0,
+        total=1,
         tax=0,
         currency='USD',
         delivery=Decimal(0),
