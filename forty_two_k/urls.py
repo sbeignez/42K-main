@@ -9,5 +9,6 @@ urlpatterns = patterns('',
      {'next_page': '/'}),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url('^payments/', include('payments.urls')),
     url(r'', include('app.urls')),
 )

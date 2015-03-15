@@ -1,0 +1,52 @@
+{% extends "_layouts/base.html" %}
+{% load staticfiles %}
+{% block css %}
+{{block.super}}
+<style>
+   /* Move down content because we have a fixed navbar that is 50px tall */
+   body {
+   padding-top: 50px;
+   padding-bottom: 20px;
+   }
+</style>
+{% endblock css %}
+{% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
+{% block page_class %}home-page{% endblock %}
+{% block content %}
+<div class="container">
+   <!-- Example row of columns -->
+  <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th><span class="glyphicon glyphicon-time"> </span> Total</th>
+              <th><span class="glyphicon glyphicon-road"> </span> Photos</th>
+              <th><span class="glyphicon glyphicon-tags"> </span> Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for order in orders %}
+                            {% if order.payment.status == 'confirmed' %}
+
+            <tr>
+              <td>{{order.payment.total}}</td>
+
+              <td>{% for item in order.items.all %}
+                  {{ item.name}}
+                  <br>{% endfor %}</td>
+            <td>{{ order.payment.modified|date:"d F Y" }}</td>
+              {% endif %}
+          </tr>
+          {% endfor %}
+
+
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+{% endblock %}

@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django_countries',
     'geoposition',
     'storages',
+    'payments',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -153,3 +154,18 @@ STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 # you run `collectstatic`).
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+PAYMENT_BASE_URL = 'http://42k-main-dev.elasticbeanstalk.com/'
+
+PAYMENT_MODEL = 'app.Payment'
+
+PAYMENT_VARIANTS = {
+    'default': ('payments.dummy.DummyProvider', {}),
+    'stripe': ('payments.stripe.StripeProvider', {
+        'secret_key': 'sk_test_SCqh087ZoNas2nu43ZUNdAFe',
+        'public_key': 'pk_test_nqGlxBb9xaNynjwRtFjt9a9v'}),
+    'paypal': ('payments.paypal.PaypalProvider', {
+        'client_id': 'AZB1HYckK0hd-LptuIXplw39ntMsCm5CvS-ePMdlICbrhPCrmZIZEh9cu9Wz-Xs556QP6jajdB3jcFMo',
+        'secret': 'EDMbCYexxu36FmqrEKURw-24QHJMIpgrBXoXQE77Mo7T6RXLlM5W0fNOUphRYytkPAkDVxCECrVgmgWR',
+        'endpoint': 'https://api.sandbox.paypal.com',
+        'capture': False})}

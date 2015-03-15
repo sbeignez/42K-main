@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
 from geoposition.fields import GeopositionField
+from payments.models import BasePayment
 
 
 class AppUser(models.Model):
@@ -64,6 +65,37 @@ class Photo(models.Model):
         return self.name
 
 
+class Payment(BasePayment):
+
+    def get_failure_url(self):
+        return "http://localhost:8000/orders"
+
+    def get_success_url(self):
+        return "http://localhost:8000/orders"
+
+    def get_purchased_items(self):
+        order = Order.objects.get(payment=self)
+        items = OrderItem.objects.filter(order=order)
+        for item in items:
+            yield item
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, related_name='%(class)s_user')
+    payment = models.ForeignKey(Payment, related_name='%(class)s_payment')
+    items = models.ManyToManyField(Photo, through='OrderItem')
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='%(class)s_order')
+    photo = models.ForeignKey(Photo, related_name='%(class)s_photo')
+    name = models.CharField(max_length=50, default='')
+    sku = models.CharField(max_length=4, default='')
+    quantity = models.PositiveSmallIntegerField(default=1)
+    price = models.DecimalField(decimal_places=2, max_digits=5, default=25.0)
+    currency = models.CharField(max_length=3, default='USD')
+
+
 class Tag(models.Model):
     photo = models.ForeignKey(Photo, related_name='%(class)s_photo')
     tagged_by = models.ForeignKey(User, related_name='%(class)s_tagged_by')
@@ -72,3 +104,5 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return self.date + " " + self.bib
+
+
