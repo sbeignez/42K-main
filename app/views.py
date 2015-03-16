@@ -99,7 +99,7 @@ def upload(request):
     file = upload_receive( request )
     raceid = request.POST.get("raceevent", "")
     raceevent = RaceEvent.objects.get(id=1)
-    instance = Photo( photo = file, race=raceevent)
+    instance = Photo( file = file, race=raceevent)
     instance.save()
 
     basename = os.path.basename( instance.file.path )

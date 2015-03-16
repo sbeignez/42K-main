@@ -67,10 +67,10 @@ class Photo(models.Model):
 class Payment(BasePayment):
 
     def get_failure_url(self):
-        return "http://localhost:8000/orders"
+        return "/orders"
 
     def get_success_url(self):
-        return "http://localhost:8000/orders"
+        return "/orders"
 
     def get_purchased_items(self):
         order = Order.objects.get(payment=self)
