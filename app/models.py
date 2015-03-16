@@ -55,7 +55,7 @@ class RaceEvent(models.Model):
 
 
 class Photo(models.Model):
-    file = models.FileField( upload_to = MEDIA_ROOT )    #date = models.DateTimeField()
+    file = models.ImageField( upload_to = MEDIA_ROOT )    #date = models.DateTimeField()
     race = models.ForeignKey(RaceEvent, related_name='%(class)s_race', default=None)
     #location = GeopositionField(default='0.0,0.0')
     #uploaded_by = models.ForeignKey(User, related_name='%(class)s_uploaded_by')

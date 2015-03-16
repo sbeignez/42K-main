@@ -83,7 +83,7 @@ def order(request):
     order = Order.objects.create(user=request.user, payment=payment)
 
     for photo in photos:
-        OrderItem.objects.create(order=order, photo=photo, name=photo.name, sku='',
+        OrderItem.objects.create(order=order, photo=photo, name=photo.file.path, sku='',
                             quantity=1, price=Decimal(7), currency='USD')
 
     return order_details(request, payment_id=payment.id)
@@ -99,7 +99,7 @@ def upload(request):
     file = upload_receive( request )
     raceid = request.POST.get("raceevent", "")
     raceevent = RaceEvent.objects.get(id=1)
-    instance = Photo( file = file, race=raceevent)
+    instance = Photo( photo = file, race=raceevent)
     instance.save()
 
     basename = os.path.basename( instance.file.path )
