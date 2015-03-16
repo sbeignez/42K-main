@@ -1,8 +1,16 @@
 
-
+# Compiled Python files
 *.pyc
 
+# Virtual Env files
+venv/*
+
+<<<<<<< Updated upstream
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+=======
+app/migrations/0001_initial.py
+>>>>>>> Stashed changes
+
