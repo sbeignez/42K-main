@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from os.path import dirname
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -27,6 +28,8 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -37,6 +40,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+
+    'debug_toolbar',
+    'jfu',
     'django_countries',
     'geoposition',
     'storages',
@@ -45,6 +51,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+
     'app',
 )
 
@@ -111,6 +118,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     # Required by allauth template tags
     "django.core.context_processors.request",
+    "django.core.context_processors.static",
     # allauth specific context processors
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
@@ -146,14 +154,19 @@ AWS_SECRET_ACCESS_KEY = 'X9mvZII72dmUa5c6KfzvjYCGmMYqKH5M0a7teymQ'
 # We also use it in the next setting.
 AWS_S3_CUSTOM_DOMAIN = 's3-ap-southeast-1.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
 
-# This is used by the `static` template tag from `static`, if you're using that. Or if anything else
-# refers directly to STATIC_URL. So it's safest to always set it.
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+STATICFILES_LOCATION = 'static'
+MEDIAFILES_LOCATION = 'media'
 
-# Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
-# you run `collectstatic`).
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'forty_two_k.custom_storages.StaticStorage'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/home/media/media.lawrence.com/static/"
+STATIC_ROOT = 'static/'
 
 PAYMENT_BASE_URL = 'http://42k-main-dev.elasticbeanstalk.com/'
 
@@ -169,3 +182,27 @@ PAYMENT_VARIANTS = {
         'secret': 'EDMbCYexxu36FmqrEKURw-24QHJMIpgrBXoXQE77Mo7T6RXLlM5W0fNOUphRYytkPAkDVxCECrVgmgWR',
         'endpoint': 'https://api.sandbox.paypal.com',
         'capture': False})}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+        'level': 'ERROR',
+        'filters': ['require_debug_false'],
+        'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+        'handlers': ['mail_admins'],
+        'level': 'ERROR',
+        'propagate': True,
+        },
+    }
+}

@@ -1,0 +1,34 @@
+{% extends 'jfu/upload_form.html' %}
+
+
+
+{% block JS_UPLOAD_TEMPLATE_UPLOAD %}
+<td>
+    <p class="name">
+        <select id="raceevent" name="raceevent">
+            {% for race in races %}
+                <option value=" {{ race.id }}"> {{ race.name }}</option>
+            {% endfor %}
+        </select>
+    </p>
+</td>
+{% endblock %}
+
+ {% block JS_INIT %}
+var formData = $('#fileupload').serializeArray();
+formData.push(
+    { name: "csrfmiddlewaretoken", value: "{{ csrf_token }}" }
+);
+
+$('#fileupload').fileupload({
+    formData: formData,
+    {% block JS_OPTS %}
+    sequentialUploads: true,
+    acceptFileTypes: /(\.|\/)(png|gif|jpe?g)$/i
+    {% endblock %}
+    }).bind('fileuploadstart', function (e, data) {
+     formData.push(
+        { name: "raceevent", value: $("#raceevent").val() }
+     );
+ })
+{% endblock %}

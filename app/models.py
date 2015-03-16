@@ -1,5 +1,6 @@
 import hashlib
 from allauth.socialaccount.models import SocialAccount
+from django.conf.global_settings import MEDIA_ROOT
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
@@ -54,12 +55,10 @@ class RaceEvent(models.Model):
 
 
 class Photo(models.Model):
-    name = models.CharField(max_length=50)
-    image = models.ImageField(default='')
-    date = models.DateTimeField()
-    location = GeopositionField(default='0.0,0.0')
-    uploaded_by = models.ForeignKey(User, related_name='%(class)s_uploaded_by')
-    race = models.ForeignKey(RaceEvent, related_name='%(class)s_race')
+    file = models.FileField( upload_to = MEDIA_ROOT )    #date = models.DateTimeField()
+    race = models.ForeignKey(RaceEvent, related_name='%(class)s_race', default=None)
+    #location = GeopositionField(default='0.0,0.0')
+    #uploaded_by = models.ForeignKey(User, related_name='%(class)s_uploaded_by')
 
     def __unicode__(self):
         return self.name

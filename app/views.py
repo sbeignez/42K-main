@@ -1,10 +1,18 @@
 from decimal import Decimal
+from boto.s3.bucket import Bucket
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
+import os
+from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.views import generic
+from django.views.decorators.http import require_POST
+from jfu.http import upload_receive, UploadResponse, JFUResponse
 from payments import get_payment_model, RedirectNeeded
 
 from app.models import RaceEvent, Order, Photo, OrderItem
+from forty_two_k import settings
 
 
 def home(request):
@@ -31,8 +39,14 @@ class OrdersView(generic.ListView):
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user.id)
 
-def photographer(request):
-    return render(request, 'app/photographer.html')
+class UploadView(generic.TemplateView):
+    template_name = 'app/upload.html'
+
+    def get_context_data(self, **kwargs):
+        context = super( UploadView, self ).get_context_data( **kwargs )
+        context['accepted_mime_types'] = ['image/*']
+        context['races'] = RaceEvent.objects.all()
+        return context
 
 def order_details(request, payment_id):
     payment = get_object_or_404(get_payment_model(), id=payment_id)
@@ -73,3 +87,49 @@ def order(request):
                             quantity=1, price=Decimal(7), currency='USD')
 
     return order_details(request, payment_id=payment.id)
+
+
+@require_POST
+def upload(request):
+
+    # The assumption here is that jQuery File Upload
+    # has been configured to send files one at a time.
+    # If multiple files can be uploaded simulatenously,
+    # 'file' may be a list of files.
+    file = upload_receive( request )
+    raceid = request.POST.get("raceevent", "")
+    raceevent = RaceEvent.objects.get(id=1)
+    instance = Photo( file = file, race=raceevent)
+    instance.save()
+
+    basename = os.path.basename( instance.file.path )
+    file_dict = {
+        'name' : basename,
+        'size' : file.size,
+
+        'url': settings.MEDIA_URL + basename,
+        'thumbnailUrl': settings.MEDIA_URL + basename,
+
+        'deleteUrl': reverse('jfu_delete', kwargs = { 'pk': instance.pk }),
+        'deleteType': 'POST',
+    }
+
+    return UploadResponse( request, file_dict )
+
+@require_POST
+def upload_delete( request, pk ):
+    success = True
+    try:
+        instance = Photo.objects.get( pk = pk )
+
+        conn = S3Connection(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
+        b = Bucket(conn, settings.AWS_STORAGE_BUCKET_NAME)
+        k = Key(b)
+        k.key = instance.file.path
+        b.delete_key(k)
+
+        instance.delete()
+    except Photo.DoesNotExist:
+        success = False
+
+    return JFUResponse( request, success )
