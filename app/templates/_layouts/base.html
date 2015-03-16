@@ -62,39 +62,58 @@
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                      </button>
-
-                     <a class="navbar-brand" href="{% url 'home' %}" alt="42K">
-                        <img alt="42K" src="42klogo.png" height="32" width="32">
-                        <b>42</b>K <small>Marathon photos</small></a>
+                     <span>
+                        <a class="navbar-brand" href="{% url 'home' %}" alt="42K" >
+                           <img alt="42K" src="{% static 'img/Logo-white-128.png' %}" height="24" width="24">
+                        </a>
+                     </span>
+                     <a class="navbar-brand" href="{% url 'home' %}" alt="42K" >
+                           42K Marathon photos
+                        </a>
                   </div>
                   <div class="navbar-collapse collapse">
-                     <ul class="nav navbar-nav">
+                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url 'runner' %}"><span class="glyphicon glyphicon-road"></span> Races</a></li>
                         <li><a href="{%  url 'runner' %}"><span class="glyphicon glyphicon-picture"></span> Runners</a></li>
                         <li><a href="{% url 'photographer' %}"><span class="glyphicon glyphicon-camera"></span> Photographers</a></li>
+                        
+                        <!-- DROP DOWN
                         <li class="dropdown">
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <span class="caret"></span></a>
                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="{% url 'order' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Order</a></li>
-                              <li class="divider"></li>
-                              <li class="dropdown-header">Users</li>
-                              <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a> </li>
-                              <li><a href="login.html"><span class="glyphicon glyphicon-user"></span> Log-in / Log-out</a></li>
-                              <li class="divider"></li>
-                              <li class="dropdown-header">Admin</li>
-                              <li><a href="{% url 'tagger' %}"><span class="glyphicon glyphicon-tags"></span> Tag</a></li>
+                              
+                              
+                              
                            </ul>
                         </li>
-                     </ul>
-                     {% if user.is_authenticated %}
-                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img style="height:18px" src="{{ user.app.profile_image_url }}"/> {{ user.first_name }} {{ user.last_name }} <span class="caret"></span></a>
+                        -->
+                     
+                        
+                        <li class="dropdown"> <!-- USER DROP DOWN -->
+                           {% if user.is_authenticated %}
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                              <img style="height:18px" src="{{ user.app.profile_image_url }}"/>
+                              {{ user.first_name }} {{ user.last_name }}
+                              <span class="caret"></span>
+                           </a>
                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="{% url 'account_logout' %}"> Logout</a></li>
+
+                              <li><a href="{% url 'orders' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Orders</a></li>
+                              <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a> </li>
+                              <li><a href="{% url 'account_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                              <li class="divider"></li>
+                              <li class="dropdown-header">Admin only:</li>
+                              <li><a href="{% url 'order' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Order page (direct)</a></li>
+                              <li><a href="{% url 'tagger' %}"><span class="glyphicon glyphicon-tags"></span> Tagger</a></li>
                            </ul>
+                           {% else %}
+                           <a href="#">
+                              <span class="btn btn-primary btn-xs">Facebook log-in</span>
+                           </a>
+                           {% endif %}
                         </li>
+                        
                      </ul>
-                     {% endif %}
                   </div>
                   <!--/.navbar-collapse -->
                </div>
