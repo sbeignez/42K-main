@@ -61,7 +61,7 @@ class Photo(models.Model):
     #uploaded_by = models.ForeignKey(User, related_name='%(class)s_uploaded_by')
 
     def __unicode__(self):
-        return self.name
+        return self.file.path
 
 
 class Payment(BasePayment):
