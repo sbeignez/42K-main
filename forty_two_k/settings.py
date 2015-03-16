@@ -174,8 +174,8 @@ PAYMENT_MODEL = 'app.Payment'
 PAYMENT_VARIANTS = {
     'default': ('payments.dummy.DummyProvider', {}),
     'stripe': ('payments.stripe.StripeProvider', {
-        'secret_key': 'sk_test_SCqh087ZoNas2nu43ZUNdAFe',
-        'public_key': 'pk_test_nqGlxBb9xaNynjwRtFjt9a9v'}),
+        'secret_key': 'sk_test_iePSVpufBtQvvqE0ANOtLgO6',
+        'public_key': 'pk_test_s1sUBNuzYh6KFxhBcZAnq9En'}),
     'paypal': ('payments.paypal.PaypalProvider', {
         'client_id': 'AZB1HYckK0hd-LptuIXplw39ntMsCm5CvS-ePMdlICbrhPCrmZIZEh9cu9Wz-Xs556QP6jajdB3jcFMo',
         'secret': 'EDMbCYexxu36FmqrEKURw-24QHJMIpgrBXoXQE77Mo7T6RXLlM5W0fNOUphRYytkPAkDVxCECrVgmgWR',
