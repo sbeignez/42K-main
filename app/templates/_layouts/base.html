@@ -120,16 +120,27 @@
             </div>
 
             <div role="main">
-               {% block content %}{% endblock %}
+               {% block content %}
+
+               {% endblock %}
             </div>
-            <footer>
-               {% block footer %}
-               <div class="container">
+
+            <!-- Footer ================================================== -->
+            <footer class="footer" role="contentinfo">
+            {% block footer %} 
+               <div class="container-fluid">
                   <hr>
-                  <p>About | Contact | FAQ | Blog | Terms and conditions | 42K Photos &copy; {% now "Y" %}</p>
+                  <p>
+                     42K Photos &copy; {% now "Y" %}
+                     | <a href="feedbacks.html">Send your feedbacks</a>
+                     | <a href="support.html">FAQ and Support</a> 
+                     | <a href="tnc.html">Terms and conditions</a>
+                  </p>
                </div>
-               {% endblock footer %}
+            {% endblock footer %}
             </footer>
+            
+            <!-- JavaScript ================================================== -->
             <!-- JavaScript at the bottom for fast page loading -->
             <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
             {% block cdn_js %}
@@ -137,11 +148,14 @@
             <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/libs/jquery-2.1.3.min.js"><\/script>')</script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
             {% endblock cdn_js %}
+
             <!-- scripts concatenated and minified via django-compressor -->
             {% block js %}
-{#            <script src="{% static 'js/main.js' %}"></script>#}
+               {# <script src="{% static 'js/main.js' %}"></script> #}
             {% endblock js %}
             <!-- end scripts -->
+            
+            <!-- Analytics ================================================== -->
             <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
                mathiasbynens.be/notes/async-analytics-snippet -->
             <script>
@@ -150,6 +164,6 @@
                g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
                s.parentNode.insertBefore(g,s)}(document,'script'));
             </script>
-            {% endblock %}
+            {% endblock %} <!-- ??? -->
             </body>
          </html>
