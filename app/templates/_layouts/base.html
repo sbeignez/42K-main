@@ -35,7 +35,14 @@
                   Modernizr enables HTML5 elements & feature detects for optimal performance.
                   Create your own custom Modernizr build: www.modernizr.com/download/ -->
                <script src="{% static 'js/libs/modernizr-2.8.3.js' %}"></script>
+
+               <!-- Favicons -->
+               <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+               <link rel="icon" href="/favicon.ico">
+
             </head>
+
+
             <body class="{% block body_class %}{% endblock %}" {% block body_attributes %}{% endblock %}>
             {% block body %}
             <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
@@ -55,7 +62,10 @@
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                      </button>
-                     <a class="navbar-brand" href="{% url 'home' %}"><b>42</b>K <small>Marathon photos</small></a>
+
+                     <a class="navbar-brand" href="{% url 'home' %}" alt="42K">
+                        <img alt="42K" src="42klogo.png" height="32" width="32">
+                        <b>42</b>K <small>Marathon photos</small></a>
                   </div>
                   <div class="navbar-collapse collapse">
                      <ul class="nav navbar-nav">
@@ -89,6 +99,7 @@
                   <!--/.navbar-collapse -->
                </div>
             </div>
+
             <div role="main">
                {% block content %}{% endblock %}
             </div>
