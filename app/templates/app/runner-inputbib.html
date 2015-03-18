@@ -1,0 +1,71 @@
+{% extends "_layouts/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class='container'>
+        <div class="row">
+            <h1>Participation details</h1>
+            <h2>BIB number</h2>
+
+            <div class="form-group">
+                <label for="inputEmail" class="control-label col-xs-12 col-sm-2">Bib number:</label>
+
+                <div class="col-xs-12 col-sm-10">
+                    <input type="text" class="form-control" id="inputEmail" placeholder="M 0001">
+
+                    <p class="help-block text-left">
+                        <small>Note: For this race, the BIB number starts with M (for men) or W (for woman), followed by
+                            4 digits
+                        </small>
+                    </p>
+                </div>
+            </div>
+
+
+            <h2>Time</h2>
+
+            <div class="form-group">
+                <label for="inputEmail" class="control-label col-xs-12 col-sm-2">Finish time:</label>
+
+                <div class="col-xs-12 col-sm-10">
+                    <div class="col-xs-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="0">
+                            <span class="input-group-addon">H</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="00">
+                            <span class="input-group-addon">Min</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="00">
+                            <span class="input-group-addon">S</span>
+                        </div>
+                    </div>
+
+                    <br>
+                    <p class="help-block text-left"><small>If race date < today(), inactive: (come back later to give your finish time)</small> </p>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail" class="control-label col-xs-2"></label>
+
+                <div class="col-xs-10">
+                    <a href="/order" class="btn btn-primary">Submit</a>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+{% endblock %}

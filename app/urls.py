@@ -8,7 +8,11 @@ urlpatterns = patterns(
     url(r'^$', 'home', name='home'),
     url('tnc.html', 'tnc', name='tnc'),
     url('support.html', 'support', name='support'),
+
+    url(r'^runner/runner-overview.html', 'RunnerOverview', name='runner-overview'),
+    url(r'^runner/runner-inputbib.html', 'RunnerInputbib', name='runner-inputbib'),
     url(r'^runner/$', views.RunnerView.as_view(), name='runner'),
+
     url(r'^photographer/$', views.UploadView.as_view(), name='photographer'),
     url(r'^tagger/tag.html', 'tag', name='tag'),
     url(r'^tagger/$', views.TaggerView.as_view(), name='tagger'),

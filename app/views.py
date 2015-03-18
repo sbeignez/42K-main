@@ -24,6 +24,12 @@ def tnc(request):
 def support(request):
     return render(request, 'app/support.html')
 
+def RunnerOverview(request):
+    return render(request, 'app/runner-overview.html')
+
+def RunnerInputbib(request):
+    return render(request, 'app/runner-inputbib.html')
+
 class RunnerView(generic.ListView):
     template_name = 'app/runner.html'
     context_object_name = 'races'
@@ -142,3 +148,4 @@ def upload_delete( request, pk ):
         success = False
 
     return JFUResponse( request, success )
+

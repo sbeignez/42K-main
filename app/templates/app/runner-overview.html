@@ -1,13 +1,13 @@
 {% extends "_layouts/base.html" %}
 {% load staticfiles %}
 
-{% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
-{% block page_class %}home-page{% endblock %}
-
 {% block content %}
 
     <div class="container">
       <h1>Your races events <span class="badge">3</span></h1>
+
+        <h3><a href="/runner" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> ADD Race event</a></h3>
+
       <div class="panel-group" id="accordion">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -183,9 +183,10 @@
             </div>
           </div>
         </div>
-      </div> 
+      </div>
+        <h3><a href="/runner" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> ADD Race event</a></h3>
     </div>
-            <h3><a href="search.html" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> ADD Race event</a></h3>
+
 
 
 {% endblock %}
