@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'Permanent Marker';
+  src: url('http://fonts.googleapis.com/css?family=Permanent+Marker') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('http://fonts.googleapis.com/css?family=Permanent+Marker') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+body {
+	font-family: 'Ubuntu', sans-serif;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+h1 {
+	font-family: 'Permanent Marker', sans-serif;
+    color: #222222;
+}
+
+h2 { 
+	font-family: 'Permanent Marker', sans-serif;
+	color: #555555;
+}
+
+.navbar-inverse .navbar-brand {
+	font-family: 'Permanent Marker', sans-serif;
+	font-size: 250%;
+	/* color: white; */
+}
+
+.navbar-inverse {
+  /*
+  background-color: #3b5998;
+  border-color: #627AAD;
+  */
+}
+
+footer {
+    background-color: #eeeeee;
+}

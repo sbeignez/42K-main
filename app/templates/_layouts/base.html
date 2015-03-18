@@ -29,6 +29,7 @@
                <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
                {% endblock cdn_css %}
                <link rel="stylesheet" href="{% static 'css/app.css' %}">
+                <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
                {% block css %}{% endblock %}
                <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
                <!-- All JavaScript at the bottom, except this Modernizr build.
@@ -53,6 +54,8 @@
             <header>
                {% block header %}{% endblock %}
             </header>
+
+            <!-- NavBar ================================================== -->
             <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                <div class="container">
                   <div class="navbar-header">
@@ -62,13 +65,13 @@
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                      </button>
-                     <span>
+                     <!--<span>
                         <a class="navbar-brand" href="{% url 'home' %}" alt="42K" >
                            <img alt="42K" src="{% static 'img/Logo-white-128.png' %}" height="24" width="24">
                         </a>
-                     </span>
+                     </span>-->
                      <a class="navbar-brand" href="{% url 'home' %}" alt="42K" >
-                           42K Marathon photos
+                           42<sup>K</sup>
                         </a>
                   </div>
                   <div class="navbar-collapse collapse">
@@ -119,6 +122,7 @@
                </div>
             </div>
 
+            <!-- Page ================================================== -->
             <div role="main">
                {% block content %}
 

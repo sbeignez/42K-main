@@ -18,6 +18,12 @@ from forty_two_k import settings
 def home(request):
     return render(request, 'app/home.html')
 
+def tnc(request):
+    return render(request, 'app/tnc.html')
+
+def support(request):
+    return render(request, 'app/support.html')
+
 class RunnerView(generic.ListView):
     template_name = 'app/runner.html'
     context_object_name = 'races'
@@ -31,6 +37,9 @@ class TaggerView(generic.ListView):
 
     def get_queryset(self):
         return RaceEvent.objects.all()
+
+def tag(request):
+    return render(request, 'app/tag.html')
 
 class OrdersView(generic.ListView):
     template_name = 'app/orders.html'

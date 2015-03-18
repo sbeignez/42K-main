@@ -4,9 +4,11 @@
 {{block.super}}
 <style>
    /* Move down content because we have a fixed navbar that is 50px tall */
+   /* Move in css
    body {
    padding-top: 50px;
    padding-bottom: 20px;
+   */
    }
 </style>
 {% endblock css %}
@@ -17,13 +19,13 @@
    <!-- Example row of columns -->
    <div class="row">
       <div class='col-sm-6 col-xs-12'>
-         <h3>Runners</h3>
-         <h4>Find your photos</h4>
+         <h1>Runners</h1>
+         <h2>Find your photos</h2>
          <a class="btn btn-primary btn-md" href="{% url 'runner' %}"><img src="{% static 'img/marathon runner.jpg' %}" width="100%"></a>
       </div>
       <div class='col-sm-6 col-xs-12'>
-         <h3>Photographers</h3>
-         <h4>Upload your photos</h4>
+         <h1>Photographers</h1>
+         <h2>Upload your photos</h2>
          <a class="btn btn-primary btn-md" href="{% url 'photographer' %}">
          <img src="{% static 'img/photographer.jpg' %}" width="100%">
          </a>
