@@ -12,7 +12,7 @@ from django.views.decorators.http import require_POST
 from jfu.http import upload_receive, UploadResponse, JFUResponse
 from payments import get_payment_model, RedirectNeeded
 
-from app.forms import  RaceListFormHelper
+from app.forms import  RaceListFormHelper, NewRaceForm
 from app.models import RaceEvent, Order, Photo, OrderItem
 from forty_two_k import settings
 from raceFuncs import RaceFilter, RaceTable
@@ -167,6 +167,7 @@ class PagedFilteredTableView(SingleTableView):
     def get_context_data(self, **kwargs):
         context = super(PagedFilteredTableView, self).get_context_data()
         context[self.context_filter_name] = self.filter
+        context['new_race_form'] = NewRaceForm
         context['races'] = RaceEvent.objects.all()
         return context
 
