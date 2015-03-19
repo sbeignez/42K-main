@@ -1,4 +1,5 @@
 from decimal import Decimal
+
 from boto.s3.bucket import Bucket
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
@@ -11,8 +12,10 @@ from django.views.decorators.http import require_POST
 from jfu.http import upload_receive, UploadResponse, JFUResponse
 from payments import get_payment_model, RedirectNeeded
 
+from app.forms import  RaceListFormHelper
 from app.models import RaceEvent, Order, Photo, OrderItem
 from forty_two_k import settings
+from raceFuncs import RaceFilter, RaceTable
 
 
 def home(request):
@@ -32,13 +35,6 @@ def RunnerOverview(request):
 
 def RunnerInputbib(request):
     return render(request, 'app/runner-inputbib.html')
-
-class RunnerView(generic.ListView):
-    template_name = 'app/runner.html'
-    context_object_name = 'races'
-
-    def get_queryset(self):
-        return RaceEvent.objects.all()
 
 class TaggerView(generic.ListView):
     template_name = 'app/tagger.html'
@@ -151,4 +147,35 @@ def upload_delete( request, pk ):
         success = False
 
     return JFUResponse( request, success )
+
+
+
+from django_tables2 import SingleTableView
+
+
+class PagedFilteredTableView(SingleTableView):
+    filter_class = None
+    formhelper_class = None
+    context_filter_name = 'filter'
+
+    def get_queryset(self, **kwargs):
+        qs = super(PagedFilteredTableView, self).get_queryset()
+        self.filter = self.filter_class(self.request.GET, queryset=qs)
+        self.filter.form.helper = self.formhelper_class()
+        return self.filter.qs
+
+    def get_context_data(self, **kwargs):
+        context = super(PagedFilteredTableView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+        context['races'] = RaceEvent.objects.all()
+        return context
+
+class RunnerView(PagedFilteredTableView):
+    model = RaceEvent
+    table_class = RaceTable
+    template_name = 'app/runner.html'
+    filter_class = RaceFilter
+    formhelper_class = RaceListFormHelper
+    formhelper_class.field_template = 'bootstrap3/layout/inline_field.html'
+    formhelper_class.form_class = 'form-inline'
 

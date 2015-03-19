@@ -17,7 +17,8 @@
 <!-- Example row of columns -->
 {% if user.is_authenticated %}
 <div class="row">
-<h1>Select a race</h1>
+<h1>Find your photos <small>- 1/2</small></h1>
+<h2>Select your race</h2>
 <form class="form-horizontal">
    <div class="form-group">
       <label for="inputEmail" class="control-label col-xs-2 col-sm-2">Date</label>
@@ -75,14 +76,26 @@
                <td>{{race.date|date:"d F Y"}}</td>
                <td>{{ race.city }}, {{ race.country.name }}</td>
                <td>{{ race.name }}</td>
-               <th><a href="runner-inputbib.html" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
+               <th><a href="search-2bib.html" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
             </tr>
          {% endfor %}
             <tr>
+               <td>24 February 2015</td>
+               <td>Hong Kong, Causeway Bay</td>
+               <td>Marathon of Hong Kong</td>
+               <th><a href="search-2bib.html" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
+            </tr>
+            <tr>
+               <td>03 March 2015</td>
+               <td>Hong Kong, Central</td>
+               <td>Nike night run</td>
+               <th><a href="search-2bib.html" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
+            </tr>
+            <tr>
                <td>01 July 2015</td>
-               <td>[static] Hong Kong, New territories</td>
+               <td>Hong Kong, New territories</td>
                <td>New balance 10K</td>
-               <th><a href="runner-inputbib.html" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
+               <th><a href="search-2bib.html" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
             </tr>
          </tbody>
       </table>

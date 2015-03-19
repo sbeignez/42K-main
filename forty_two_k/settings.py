@@ -40,7 +40,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
+    'django_filters',
+    'django_tables2',
+    'crispy_forms',
     'jfu',
     'django_countries',
     'geoposition',
@@ -53,6 +55,7 @@ INSTALLED_APPS = (
 
     'app',
 )
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
