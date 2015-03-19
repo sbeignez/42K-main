@@ -8,6 +8,7 @@ urlpatterns = patterns(
     url(r'^$', 'home', name='home'),
     url('tnc.html', 'tnc', name='tnc'),
     url('support.html', 'support', name='support'),
+    url('feedback.html', 'feedback', name='feedback'),
 
     url(r'^runner/runner-overview.html', 'RunnerOverview', name='runner-overview'),
     url(r'^runner/runner-inputbib.html', 'RunnerInputbib', name='runner-inputbib'),

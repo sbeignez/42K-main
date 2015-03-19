@@ -24,6 +24,9 @@ def tnc(request):
 def support(request):
     return render(request, 'app/support.html')
 
+def feedback(request):
+    return render(request, 'app/feedback.html')
+
 def RunnerOverview(request):
     return render(request, 'app/runner-overview.html')
 
