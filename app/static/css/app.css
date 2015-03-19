@@ -23,7 +23,7 @@ h2 {
 .navbar-inverse .navbar-brand {
 	font-family: 'Permanent Marker', sans-serif;
 	font-size: 250%;
-	/* color: white; */
+
 }
 
 .navbar-inverse {
@@ -33,6 +33,19 @@ h2 {
   */
 }
 
-footer {
-    background-color: #eeeeee;
+.footer {
+    background-color: #555555;
+    color: white;
+}
+
+.brand {
+    font-family: 'Permanent Marker', sans-serif;
+}
+
+.footer .brand {
+    color: white;
+}
+
+.footer a {
+    color: #cccccc;
 }

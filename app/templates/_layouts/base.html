@@ -132,14 +132,17 @@
             <!-- Footer ================================================== -->
             <footer class="footer" role="contentinfo">
             {% block footer %} 
-               <div class="container-fluid">
-                  <hr>
-                  <p>
-                     42K Photos &copy; {% now "Y" %}
-                     | <a href="feedback.html">Feedback</a>
+               <div class="container">
+                  <p><br>
+                     <a href="feedback.html">Feedback</a>
                      | <a href="support.html">Help & Support</a>
                      | <a href="tnc.html">Terms of service</a>
+                      <br>
                   </p>
+                   <div class="brand">42<sup>K</sup> Photos &copy; {% now "Y" %}</div>
+                   <br>
+               <br>
+               <br>
                </div>
             {% endblock footer %}
             </footer>
