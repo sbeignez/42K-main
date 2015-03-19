@@ -1,6 +1,6 @@
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Field, Div
+from crispy_forms.layout import Layout, Fieldset, Field, Div, Submit
 import datetime
 from django import forms
 from app.models import RaceEvent
@@ -17,7 +17,6 @@ class RaceListFormHelper(FormHelper):
 
 
 class NewRaceForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.layout = Layout(
@@ -27,11 +26,15 @@ class NewRaceForm(forms.ModelForm):
                 Field('city', placeholder='City', rows='5', css_class='input-xlarge'),
                 Field('country', placeholder='Country', css_class='input-xlarge'),
             ),
-            StrictButton('Save', css_class='btn-default'),
         )
         self.helper.form_method = 'post'
+        self.helper.form_action = 'add_race'
+        self.helper.add_input(Submit('submit', 'Save'))
+
+
 
         super(NewRaceForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = RaceEvent
+        fields = "__all__"

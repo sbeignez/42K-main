@@ -3,6 +3,7 @@ from decimal import Decimal
 from boto.s3.bucket import Bucket
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
+from django.http import HttpResponse
 import os
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -179,4 +180,15 @@ class RunnerView(PagedFilteredTableView):
     formhelper_class = RaceListFormHelper
     formhelper_class.field_template = 'bootstrap3/layout/inline_field.html'
     formhelper_class.form_class = 'form-inline'
+
+def addRace(request):
+    if request.POST:
+        name = request.POST['name']
+        date = request.POST['date']
+        city = request.POST['city']
+        country = request.POST['country']
+
+        RaceEvent.objects.create(name=name, date=date, city=city, country=country, submitted_by=request.user, validated_by=request.user)
+
+        return redirect('runner')
 
