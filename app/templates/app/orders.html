@@ -1,15 +1,6 @@
 {% extends "_layouts/base.html" %}
 {% load staticfiles %}
-{% block css %}
-{{block.super}}
-<style>
-   /* Move down content because we have a fixed navbar that is 50px tall */
-   body {
-   padding-top: 50px;
-   padding-bottom: 20px;
-   }
-</style>
-{% endblock css %}
+
 {% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
 {% block page_class %}home-page{% endblock %}
 {% block content %}
@@ -17,14 +8,13 @@
    <!-- Example row of columns -->
   <h1>Your orders</h1>
   <div class="row">
-      <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+      <div class="col-xs-12">
         <table class="table table-hover">
           <thead>
             <tr>
-              <th><span class="glyphicon glyphicon-time"> </span> Total</th>
-              <th><span class="glyphicon glyphicon-road"> </span> Photos</th>
-              <th><span class="glyphicon glyphicon-tags"> </span> Date</th>
-              <th></th>
+                <th><span class="glyphicon glyphicon-time"></span> Date</th>
+                <th><span class="glyphicon glyphicon-picture"></span> Photos</th>
+                <th><span class="glyphicon glyphicon-usd"></span> Total</th>
             </tr>
           </thead>
           <tbody>
@@ -33,15 +23,12 @@
               {% if order.payment.status == 'confirmed' %}
 
             <tr>
-                <td>{{order.payment.total}}</td>
+                <td>{{ order.payment.modified }}</td>
                 <td>
                     {% for item in order.items.all %}
-                    <ul><li>
-                      {{ item.name}}
-                    </li></ul>
+                        <img src="http://placehold.it/150x100&text={{item}}" width="150px"> {{item.race}} / {{item}} <br><a href="#"> <span class="glyphicon glyphicon-download"></span> Download</a><br>
                     {% endfor %}
-                </td>
-                <td>{{ order.payment.modified|date:"d F Y" }}</td>
+                <td>{{order.payment.total}} {{order.payment.currency}}</td>
             </tr>
               {% endif %}
           {% endfor %}
