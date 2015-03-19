@@ -1,5 +1,6 @@
 {% extends "_layouts/base.html" %}
 {% load staticfiles %}
+{% load render_table from django_tables2 %}
 {% block css %}
 {{block.super}}
 <style>
@@ -9,6 +10,8 @@
    padding-bottom: 20px;
    }
 </style>
+            <link rel="stylesheet"  href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
+
 {% endblock css %}
 {% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
 {% block page_class %}home-page{% endblock %}
@@ -19,48 +22,14 @@
 <div class="row">
 <h1>Find your photos <small>- 1/2</small></h1>
 <h2>Select your race</h2>
-<form class="form-horizontal">
-   <div class="form-group">
-      <label for="inputEmail" class="control-label col-xs-2 col-sm-2">Date</label>
-      <div class="col-xs-6 col-sm-2">
-         <select class="form-control">
-            <option>Month</option>
-            <option>01 - January</option>
-            <option selected>02 - February</option>
-            <option>03 - March</option>
-            <option>04 - April</option>
-            <option>05 - May</option>
-            <option>06 - June</option>
-            <option>07 - July</option>
-         </select>
-      </div>
-      <div class="col-xs-4 col-sm-2">
-         <select class="form-control">
-            <option>Year</option>
-            <option>2014</option>
-            <option selected>2015</option>
-            <option>2016</option>
-         </select>
-      </div>
-      <label for="inputEmail" class="control-label col-xs-2 col-sm-1">Location:</label>
-      <div class="col-xs-10 col-sm-4">
-         <select class="form-control">
-            <option>Country</option>
-            <option selected>Hong Kong</option>
-            <option>US</option>
-            <option>Canada</option>
-            <option>Australia</option>
-            <option>UK</option>
-         </select>
-      </div>
-      <div class="col-xs-1">
-         <button class="btn btn-primary">Search</button>
-      </div>
-   </div>
-</form>
+{% load crispy_forms_tags %}
 <!-- RESULTS-->
+
+
 <div class="row">
    <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+   {% crispy filter.form filter.form.helper %}
+   {% render_table table %}
       <table class="table table-hover">
          <thead>
             <tr>

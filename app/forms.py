@@ -10,6 +10,6 @@ class RaceListFormHelper(FormHelper):
         self.field_template = 'bootstrap3/layout/inline_field.html'
         self.form_class = 'form-inline'
         self.layout = Layout(
-            'country', StrictButton('Submit', type='submit', css_class='btn-primary'))
+            'date', 'country', StrictButton('Submit', type='submit', css_class='btn-primary'))
 
 

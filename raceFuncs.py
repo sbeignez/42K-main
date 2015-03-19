@@ -6,10 +6,11 @@ from app.models import RaceEvent
 
 class RaceFilter(django_filters.FilterSet):
     country = django_filters.ModelChoiceFilter(queryset=RaceEvent.objects.values_list('country', flat=True), to_field_name='country')
-
+    date = django_filters.DateRangeFilter()
     class Meta:
         model = RaceEvent
-        fields = { 'country': ['exact'],
+        fields = { 'country',
+                   'date'
                  }
 
 
