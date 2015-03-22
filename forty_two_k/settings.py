@@ -21,11 +21,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '2mfv1#*zoyb%b+$7ug1y#d!zbe!!$lzf7-jpu^34e#5!niue&b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if 'RDS_DB_NAME' in os.environ:
+    DEBUG = False
+else:
+    DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.42-k.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 
@@ -175,15 +182,16 @@ PAYMENT_BASE_URL = 'http://42k-main-dev.elasticbeanstalk.com/'
 PAYMENT_MODEL = 'app.Payment'
 
 PAYMENT_VARIANTS = {
-    'default': ('payments.dummy.DummyProvider', {}),
+#    'default': ('payments.dummy.DummyProvider', {}),
     'stripe': ('payments.stripe.StripeProvider', {
-        'secret_key': 'sk_test_iePSVpufBtQvvqE0ANOtLgO6',
-        'public_key': 'pk_test_s1sUBNuzYh6KFxhBcZAnq9En'}),
-    'paypal': ('payments.paypal.PaypalProvider', {
-        'client_id': 'AZB1HYckK0hd-LptuIXplw39ntMsCm5CvS-ePMdlICbrhPCrmZIZEh9cu9Wz-Xs556QP6jajdB3jcFMo',
-        'secret': 'EDMbCYexxu36FmqrEKURw-24QHJMIpgrBXoXQE77Mo7T6RXLlM5W0fNOUphRYytkPAkDVxCECrVgmgWR',
-        'endpoint': 'https://api.sandbox.paypal.com',
-        'capture': False})}
+        'secret_key': 'sk_test_R0wdUmJ6ow8aK3KZB2yEfesW',
+        'public_key': 'pk_test_k4aH2K0TqtPi7RTWcIisUGVi'}),
+#    'paypal': ('payments.paypal.PaypalProvider', {
+#        'client_id': 'AZB1HYckK0hd-LptuIXplw39ntMsCm5CvS-ePMdlICbrhPCrmZIZEh9cu9Wz-Xs556QP6jajdB3jcFMo',
+#        'secret': 'EDMbCYexxu36FmqrEKURw-24QHJMIpgrBXoXQE77Mo7T6RXLlM5W0fNOUphRYytkPAkDVxCECrVgmgWR',
+#        'endpoint': 'https://api.sandbox.paypal.com',
+#        'capture': False})
+}
 
 LOGGING = {
     'version': 1,
