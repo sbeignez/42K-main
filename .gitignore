@@ -9,15 +9,7 @@ virtualenv/*
 # Migration files
 app/migrations/*
 
-<<<<<<< Updated upstream
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
-=======
->>>>>>> Stashed changes
-
-.idea/*.*
+.idea/*
 
 .idea/dataSources.ids
 
@@ -26,3 +18,25 @@ app/migrations/*
 .idea/forty_two_k.iml
 
 .idea/misc.xml
+
+.idea/dataSources.ids
+
+.idea/dataSources.ids
+
+.idea/dataSources.xml
+
+.idea/misc.xml
+
+.idea/dataSources.ids
+
+<<<<<<< Updated upstream
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+=======
+>>>>>>> Stashed changes
+
+
+
+
