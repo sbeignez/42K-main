@@ -6,28 +6,12 @@
 venv/*
 virtualenv/*
 
-# Migration files
-app/migrations/*
 
+# 
 .idea/*
 
-.idea/dataSources.ids
-
-.idea/dataSources.xml
-
-.idea/forty_two_k.iml
-
-.idea/misc.xml
-
-.idea/dataSources.ids
-
-.idea/dataSources.ids
-
-.idea/dataSources.xml
-
-.idea/misc.xml
-
-.idea/dataSources.ids
+Coverage files
+htmlcov/*
 
 <<<<<<< Updated upstream
 # Elastic Beanstalk Files
@@ -41,4 +25,4 @@ app/migrations/*
 
 
 
-htmlcov/*
+
