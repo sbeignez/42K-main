@@ -154,8 +154,12 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 AWS_PRELOAD_METADATA = True
 AWS_STORAGE_BUCKET_NAME = '42kcom'
-AWS_ACCESS_KEY_ID = 'AKIAITWRDTIZ3X346GGA'
-AWS_SECRET_ACCESS_KEY = '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'
+
+# To Secure http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers-ec2.html#customize-containers-format-container_commands
+AWS_ACCESS_KEY_ID = 'AKIAIXHDV3VEGDI4YKOA'
+AWS_SECRET_ACCESS_KEY = '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'
+# In AIM, user = django
+
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
 # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
