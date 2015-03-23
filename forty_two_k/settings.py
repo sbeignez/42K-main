@@ -22,7 +22,7 @@ SECRET_KEY = '2mfv1#*zoyb%b+$7ug1y#d!zbe!!$lzf7-jpu^34e#5!niue&b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if 'RDS_DB_NAME' in os.environ:
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
 

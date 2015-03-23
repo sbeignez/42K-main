@@ -12,9 +12,15 @@
                 <h3>Loggin</h3>
                 <p>
                     <b>Can I log-in using other methods?</b><br>
-                    Currently, you can only use a Facebook account to log-in.<br>
+                    Currently, you can only use a Facebook account to log-in. Facebook login is convenient: registration is private (you just share your public infos and email address to us), quick and you don't need to remember another password.
+                    Other log-in option will be proposed in the future.<br>
                     <b>Can I view photos without being logged-in?</b><br>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim urna vel ipsum lobortis sollicitudin. Nunc viverra eu elit porttitor efficitur. Nam at arcu quis leo imperdiet laoreet ut nec nulla. Mauris ultricies diam dui, et porta sem molestie ac. Etiam sed porta mauris. Aenean a nulla euismod, condimentum lectus vel, congue nisl. Duis eu viverra lorem. In ultrices eget eros a scelerisque. Vestibulum in est ac nulla euismod maximus.
+                    You must be logged-in to view the photos.<br>
+                </p>
+                <h3>Other</h3>
+                <p>
+                    <b>How can I contribute?</b><br>
+                    Just send us a message, using the feedback link bellow.
                 </p>
             </div>
             <div class="col-xs-12 col-md-4">
@@ -26,13 +32,13 @@
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                                 <input type="text" class="form-control"
                                        placeholder="Full Name" id="name" required
-                                       {% if user.is_authenticated %}value="{{ user.first_name }} {{ user.last_name }}" readonly{% endif %} />
+                                       {% if user.is_authenticated and user.first_name and user.last_name %} value="{{ user.first_name }} {{ user.last_name }}" readonly{% endif %} />
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
                                 <input type="email" class="form-control" placeholder="Email"
                                        id="email" required
-                                       {% if user.is_authenticated %}value="{{ user.email }}" readonly{% endif %} />
+                                       {% if user.is_authenticated and user.email %} value="{{ user.email }}" readonly{% endif %} />
                             </div>
                         </div>
                     </div>

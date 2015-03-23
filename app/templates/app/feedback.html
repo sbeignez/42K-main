@@ -18,13 +18,13 @@
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                                 <input type="text" class="form-control"
                                        placeholder="Full Name" id="name" required
-                                       {% if user.is_authenticated %}value="{{ user.first_name }} {{ user.last_name }}" readonly{% endif %} />
+                                       {% if user.is_authenticated and user.first_name and user.last_name %}value="{{ user.first_name }} {{ user.last_name }}" readonly{% endif %} />
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
                                 <input type="email" class="form-control" placeholder="Email"
                                        id="email" required
-                                       {% if user.is_authenticated %}value="{{ user.email }}" readonly{% endif %} />
+                                       {% if user.is_authenticated and user.email %}value="{{ user.email }}" readonly{% endif %} />
                             </div>
                         </div>
 
