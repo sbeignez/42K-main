@@ -55,7 +55,10 @@ class RaceEvent(models.Model):
 
 
 class Photo(models.Model):
-    file = models.ImageField( upload_to = MEDIA_ROOT )    #date = models.DateTimeField()
+    file = models.ImageField( upload_to = MEDIA_ROOT )
+    #date = models.DateTimeField() upload date
+    #date (photo date)
+    #exif data
     race = models.ForeignKey(RaceEvent, related_name='%(class)s_race', default=None)
     #location = GeopositionField(default='0.0,0.0')
     #uploaded_by = models.ForeignKey(User, related_name='%(class)s_uploaded_by')
@@ -99,7 +102,7 @@ class Tag(models.Model):
     photo = models.ForeignKey(Photo, related_name='%(class)s_photo')
     tagged_by = models.ForeignKey(User, related_name='%(class)s_tagged_by')
     bib = models.CharField(max_length=10)
-    date = models.DateTimeField()
+    date = models.DateTimeField() #tag_date
 
     def __unicode__(self):
         return self.date + " " + self.bib

@@ -35,8 +35,6 @@ ALLOWED_HOSTS = [
 ]
 
 
-
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -54,11 +52,15 @@ INSTALLED_APPS = (
     'django_countries',
     'geoposition',
     'storages',
+    # Payment (Stripe)
     'payments',
+    # Authentication (Facebook)
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    # Testing
+    'coverage',
 
     'app',
 )
