@@ -21,8 +21,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '2mfv1#*zoyb%b+$7ug1y#d!zbe!!$lzf7-jpu^34e#5!niue&b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if 'RDS_DB_NAME' in os.environ:
-    DEBUG = True
+# set this variable in EB console
+if os.environ.get('ENV_NAME') == "PROD":
+    DEBUG = False
 else:
     DEBUG = True
 
@@ -167,8 +168,9 @@ AWS_STORAGE_BUCKET_NAME = '42kcom'
 
 # In AIM, user = django
 # To Secure http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers-ec2.html#customize-containers-format-container_commands
-AWS_ACCESS_KEY_ID = 'AKIAIXHDV3VEGDI4YKOA'
-AWS_SECRET_ACCESS_KEY = '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'
+# AWS_ACCESS_KEY_ID =
+# AWS_SECRET_ACCESS_KEY =
+
 
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
