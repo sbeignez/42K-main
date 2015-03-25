@@ -2,107 +2,95 @@
 {% load staticfiles %}
 {% load render_table from django_tables2 %}
 {% block css %}
-{{block.super}}
-<style>
-   /* Move down content because we have a fixed navbar that is 50px tall */
-   body {
-   padding-top: 50px;
-   padding-bottom: 20px;
-   }
-</style>
-            <link rel="stylesheet"  href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
+    {{block.super}}
+
+    <link rel="stylesheet"  href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
 
 {% endblock css %}
 {% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
 {% block page_class %}home-page{% endblock %}
 {% block content %}
-<div class="container">
-<!-- Example row of columns -->
-{% if user.is_authenticated %}
-<div class="row">
-<h1>Find your photos <small>- 1/2</small></h1>
-<h2>Select your race</h2>
-{% load crispy_forms_tags %}
-<!-- RESULTS-->
+    <div class="container">
+    <!-- Example row of columns -->
+    {% if user.is_authenticated %}
+        <div class="row">
+        <h1>Select your race</h1>
+
+        {% load crispy_forms_tags %}
+        <!-- RESULTS-->
 
 
-<div class="row">
-   <div class="col-xs-12 col-sm-10 col-sm-offset-2">
-   {% crispy filter.form filter.form.helper %}
-   {% render_table table %}
-      <table class="table table-hover">
-         <thead>
-            <tr>
-               <th><span class="glyphicon glyphicon-time"></span> Date</th>
-               <th><span class="glyphicon glyphicon-map-marker"></span> Location</th>
-               <th>Name</th>
-               <th></th>
-            </tr>
-         </thead>
-         <tbody>
-         {% for race in races %}
-            <tr>
-               <td>{{race.date|date:"d F Y"}}</td>
-               <td>{{ race.city }}, {{ race.country.name }}</td>
-               <td>{{ race.name }}</td>
-               <th><a href="runner-inputbib.html" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
-            </tr>
-         {% endfor %}
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+                {% crispy filter.form filter.form.helper %}
+                {% render_table table %}
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th><span class="glyphicon glyphicon-time"></span> Date</th>
+                        <th><span class="glyphicon glyphicon-map-marker"></span> Location</th>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for race in races %}
+                        <tr>
+                            <td>{{race.date|date:"d F Y"}}</td>
+                            <td>{{ race.city }}, {{ race.country.name }}</td>
+                            <td>{{ race.name }}</td>
+                            <th><a href="runner/input-bib" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
+                        </tr>
+                    {% endfor %}
 
-            <tr>
-               <td>01 July 2015</td>
-               <td>[Static] Hong Kong, New territories</td>
-               <td>New balance 10K</td>
-               <th><a href="runner-inputbib.html" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
-            </tr>
-         </tbody>
-      </table>
-   </div>
-   <div class="col-xs-12 col-sm-10 col-sm-offset-2">
-      Not in the list? <a href="#myModal" class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span> Add your race</a>
-   </div>
-</div>
-<!-- Modal HTML -->
-<div id="myModal" class="modal fade">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Add race</h4>
-         </div>
-         <div class="modal-body">
-            {% load crispy_forms_tags %}
-            {% crispy new_race_form new_race_form.helper %}
-         </div>
-      </div>
-   </div>
-</div>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+                Not in the list? <a href="#myModal" class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span> Add your race</a>
+            </div>
+        </div>
+        <!-- Modal HTML -->
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Add race</h4>
+                    </div>
+                    <div class="modal-body">
+                        {% load crispy_forms_tags %}
+                        {% crispy new_race_form new_race_form.helper %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-{% else %}
-<div class="row">
-   <div class="col-xs-12">
-      <h3>Get your marathon photos</h3>
-      <p>You can find here your marathon photos, uploaded by other supporters photographers.</p>
-      <h3>Be notified when new photos are avaiable</h3>
-      <p>You can register before or after the race.</p>
-      <p>Add you'll received automatically a notification everytime new photos are uploaded.</p>
-      <h3>Find your own photos</h3>
-      <p>We tag all the photos, so you don't have to search! Just input your race number, which appears on the BIB you will wear for the race.</p>
-      <p>If you don't know your number yet, you can register first. We'll help you to find it later.</p> 
-      <h3>Share photos with your friends</h3>
-      <p>Keep your memories for yourself or share your photos to your Facebook friends. Only the ones you like.</p>
-   </div>
-</div>
-<div class='row'>
-   <div class='col-xs-12 col-sm-12'>
-      {% load socialaccount %}
-      {% providers_media_js %}
-      <a class="btn btn-primary btn-md" href="{% provider_login_url "facebook" %}">
-      Login with Facebook
-      </a>
-   </div>
-</div>
-{% endif %}
+    {% else %}
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Get your marathon photos</h3>
+                <p>You can find here your marathon photos, uploaded by other supporters photographers.</p>
+                <h3>Be notified when new photos are avaiable</h3>
+                <p>You can register before or after the race.</p>
+                <p>Add you'll received automatically a notification everytime new photos are uploaded.</p>
+                <h3>Find your own photos</h3>
+                <p>We tag all the photos, so you don't have to search! Just input your race number, which appears on the BIB you will wear for the race.</p>
+                <p>If you don't know your number yet, you can register first. We'll help you to find it later.</p>
+                <h3>Share photos with your friends</h3>
+                <p>Keep your memories for yourself or share your photos to your Facebook friends. Only the ones you like.</p>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-xs-12 col-sm-12'>
+                {% load socialaccount %}
+                {% providers_media_js %}
+                <a class="btn btn-primary btn-md" href="{% provider_login_url "facebook" %}">
+                    Login with Facebook
+                </a>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
 </div>
 </div>
