@@ -1,70 +1,61 @@
 {% extends "_layouts/base.html" %}
 {% load staticfiles %}
-{% block css %}
-{{block.super}}
-<style>
-   /* Move down content because we have a fixed navbar that is 50px tall */
-   body {
-   padding-top: 50px;
-   padding-bottom: 20px;
-   }
-</style>
-{% endblock css %}
+
 {% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
 {% block page_class %}home-page{% endblock %}
+
 {% block content %}
- <div class='container'>
+    <div class='container'>
 
-      <div class='row'>
-        <div class='col-xs-12'>
-          <h2>1. Choose your photos</h2>
-        </div>
-      </div>
-
-      <div class='row'>
-
-        <div class='col-sm-4 col-xs-12'>
-          <h3>Photo 1</h3>
-          <img src="http://placehold.it/300x200" width="100%" class="img-rounded"/>
-          <div class="checkbox">
-            <label><input type="checkbox" value="1">Get</label>
-          </div>
+        <div class='row'>
+            <div class='col-xs-12'>
+                <h2>1. Choose your photos</h2>
+            </div>
         </div>
 
-        <div class='col-sm-4 col-xs-12'>
-          <h3>Photo 2</h3>
-          <img src="http://placehold.it/300x200" width="100%" class="img-rounded"/>
-          <div class="checkbox">
-            <label><input type="checkbox" value="2">Get</label>
-          </div>
+        <div class='row'>
+
+            <div class='col-sm-4 col-xs-12'>
+                <h3>Photo 1</h3>
+                <img src="http://placehold.it/300x200" width="100%" class="img-rounded"/>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="1">Get</label>
+                </div>
+            </div>
+
+            <div class='col-sm-4 col-xs-12'>
+                <h3>Photo 2</h3>
+                <img src="http://placehold.it/300x200" width="100%" class="img-rounded"/>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="2">Get</label>
+                </div>
+            </div>
+
+            <div class='col-sm-4 col-xs-12'>
+                <h3>Photo 3</h3>
+                <img src="http://placehold.it/300x200" width="100%" class="img-rounded"/>
+                <div class="checkbox">
+                    <label class="btn"><input type="checkbox" value="3">Get</label>
+                </div>
+            </div>
+
         </div>
 
-        <div class='col-sm-4 col-xs-12'>
-          <h3>Photo 3</h3>
-          <img src="http://placehold.it/300x200" width="100%" class="img-rounded"/>
-          <div class="checkbox">
-            <label class="btn"><input type="checkbox" value="3">Get</label>
-          </div>
-        </div>
-
-      </div>
-
-      <h2>2. Buy</h2>
-          <p>
+        <h2>2. Buy</h2>
+        <p>
             2 photos<br>
             Price: $2 USD
-          </p>
+        </p>
 
 
-     <form action="{{ form.action }}" method="post">
-     {% csrf_token %}
-    {{ form.as_p }}
-</form>
+        <form action="{{ form.action }}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </form>
 
-      <br>
-      <p>The payment is secured and processed by Stripe</p>
-      <p>When confirmed, you'll receive your photos immediatly by email</p>
+        <br>
+        <p>The payment is secured and processed by Stripe</p>
+        <p>When confirmed, you'll receive your photos immediately by email</p>
 
-
-</div>
+    </div>
 {% endblock %}

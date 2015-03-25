@@ -26,6 +26,14 @@ if 'RDS_DB_NAME' in os.environ:
 else:
     DEBUG = True
 
+
+# Emails
+EMAIL_SUBJECT_PREFIX = "[42K]"
+SERVER_EMAIL = "42k-server@trophee.co"
+ADMINS = ('Leo', '42k-admin@trophee.co')
+
+
+
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = [
