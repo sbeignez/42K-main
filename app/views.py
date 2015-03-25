@@ -40,7 +40,7 @@ def handler500(request):
 def home(request):
     return render(request, 'app/home.html')
 
-def tnc(request):
+def terms(request):
     return render(request, 'app/tnc.html')
 
 def support(request):

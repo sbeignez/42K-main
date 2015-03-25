@@ -6,9 +6,9 @@ from app import views
 urlpatterns = patterns(
     'app.views',
     url(r'^$', 'home', name='home'),
-    url('tnc.html', 'tnc', name='tnc'),
-    url('support.html', 'support', name='support'),
-    url(r'/feedback/$', 'feedback', name='feedback'),
+    url(r'^terms/$', 'terms', name='terms'),
+    url(r'^support/$', 'support', name='support'),
+    url(r'^feedback/$', 'feedback', name='feedback'),
 
     url(r'^runner/runner-overview.html', 'RunnerOverview', name='runner-overview'),
     url(r'^runner/input-bib/$', 'RunnerInputbib', name='runner-inputbib'),

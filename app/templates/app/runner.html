@@ -39,7 +39,7 @@
                             <td>{{race.date|date:"d F Y"}}</td>
                             <td>{{ race.city }}, {{ race.country.name }}</td>
                             <td>{{ race.name }}</td>
-                            <th><a href="runner/input-bib" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
+                            <th><a href="{% url 'runner-inputbib' %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
                         </tr>
                     {% endfor %}
 

@@ -134,12 +134,14 @@
             {% block footer %} 
                <div class="container">
                   <p><br>
-                     <a href="feedback">Feedback</a>
-                     | <a href="support.html">Help & Support</a>
-                     | <a href="tnc.html">Terms of service</a>
+                     <a href="{% url 'feedback' %}">Feedback</a>
+                     | <a href="{% url 'support' %}">Help & Support</a>
+                     | <a href="{% url 'terms' %}">Terms of service</a>
                       <br>
                   </p>
-                   <div class="brand">42<sup>K</sup> Photos &copy; {% now "Y" %}, </div> (25-03-2015)
+                   <div class="brand">42<sup>K</sup> Photos &copy; {% now "Y" %}, </div>
+                   <br>
+                   <small>(25-03-2015)</small>
                    <br>
                <br>
                <br>

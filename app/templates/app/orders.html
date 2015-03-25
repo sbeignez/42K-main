@@ -26,7 +26,7 @@
                 <td>{{ order.payment.modified }}</td>
                 <td>
                     {% for item in order.items.all %}
-                        <img src="http://placehold.it/150x100&text={{item}}" width="150px"> {{item.race}} / {{item}} <br><a href="#"> <span class="glyphicon glyphicon-download"></span> Download</a><br>
+                        <img src="{% static item.file.name %}" width="150px"> {{item.race}} / {{item}} <br><a href="#"> <span class="glyphicon glyphicon-download"></span> Download</a><br>
                     {% endfor %}
                 <td>{{order.payment.total}} {{order.payment.currency}}</td>
             </tr>
