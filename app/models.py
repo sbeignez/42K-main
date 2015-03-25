@@ -4,7 +4,7 @@ from django.conf.global_settings import MEDIA_ROOT
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
-from geoposition.fields import GeopositionField
+# from geoposition.fields import GeopositionField
 from payments.models import BasePayment
 
 
@@ -26,12 +26,10 @@ class AppUser(models.Model):
 
         return "http://www.gravatar.com/avatar/{}?s=40".format(hashlib.md5(self.user.email).hexdigest())
 
-
     def __unicode__(self):
         return self.user.username
 
 User.app = property(lambda u: AppUser.objects.get_or_create(user=u)[0])
-
 
 
 class RaceEvent(models.Model):
@@ -43,9 +41,9 @@ class RaceEvent(models.Model):
     name = models.CharField(max_length=50)
     date = models.DateTimeField()
     url = models.URLField()
-    city = models.CharField(max_length=20)
+    city = models.CharField(max_length=30)
     country = CountryField()
-    bib_format = models.CharField(max_length=10)
+    bib_format = models.CharField(max_length=20)
     submitted_by = models.ForeignKey(User, related_name='%(class)s_submitted_by')
     validated_by = models.ForeignKey(User, related_name='%(class)s_validated_by')
     status = models.CharField(max_length=10, choices=STATUSES)
@@ -55,13 +53,13 @@ class RaceEvent(models.Model):
 
 
 class Photo(models.Model):
-    file = models.ImageField( upload_to = MEDIA_ROOT )
-    #date = models.DateTimeField() upload date
-    #date (photo date)
-    #exif data
+    file = models.ImageField(upload_to=MEDIA_ROOT)
+    # date = models.DateTimeField() upload date
+    # date (photo date)
+    # exif data
     race = models.ForeignKey(RaceEvent, related_name='%(class)s_race', default=None)
-    #location = GeopositionField(default='0.0,0.0')
-    #uploaded_by = models.ForeignKey(User, related_name='%(class)s_uploaded_by')
+    # location = GeopositionField(default='0.0,0.0')
+    # uploaded_by = models.ForeignKey(User, related_name='%(class)s_uploaded_by')
 
     def __unicode__(self):
         return self.file.path
@@ -102,7 +100,8 @@ class Tag(models.Model):
     photo = models.ForeignKey(Photo, related_name='%(class)s_photo')
     tagged_by = models.ForeignKey(User, related_name='%(class)s_tagged_by')
     bib = models.CharField(max_length=10)
-    date = models.DateTimeField() #tag_date
+    date = models.DateTimeField()
+    # tag_date
 
     def __unicode__(self):
         return self.date + " " + self.bib
