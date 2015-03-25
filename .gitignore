@@ -7,6 +7,9 @@ venv/*
 virtualenv/*
 
 
+# Migrations
+app/migrations/
+
 # 
 .idea/*
 
