@@ -165,10 +165,10 @@ SOCIALACCOUNT_PROVIDERS = {
 AWS_PRELOAD_METADATA = True
 AWS_STORAGE_BUCKET_NAME = '42kcom'
 
+# In AIM, user = django
 # To Secure http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers-ec2.html#customize-containers-format-container_commands
 AWS_ACCESS_KEY_ID = 'AKIAIXHDV3VEGDI4YKOA'
 AWS_SECRET_ACCESS_KEY = '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'
-# In AIM, user = django
 
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
@@ -183,6 +183,7 @@ MEDIAFILES_LOCATION = 'media'
 STATICFILES_STORAGE = 'forty_two_k.custom_storages.StaticStorage'
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
+MEDIA_ROOT = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
 # Absolute path to the directory static files should be collected to.

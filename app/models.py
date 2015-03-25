@@ -54,7 +54,7 @@ class RaceEvent(models.Model):
 
 
 class Photo(models.Model):
-    file = models.ImageField(upload_to=MEDIA_URL)
+    file = models.ImageField(upload_to=MEDIA_ROOT, null=True, blank=True)
     # date = models.DateTimeField() upload date
     # date (photo date)
     # exif data
