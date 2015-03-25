@@ -7,27 +7,12 @@ venv/*
 virtualenv/*
 
 
-# Migrations
-app/migrations/
+# Migrations files
+app/migrations/*
 
-# 
+# pyCharm files
 .idea/*
 
-Coverage files
+# Coverage files
 htmlcov/*
 
-<<<<<<< Updated upstream
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
-=======
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-Archive.zip

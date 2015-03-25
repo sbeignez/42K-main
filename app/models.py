@@ -1,6 +1,7 @@
 import hashlib
 from allauth.socialaccount.models import SocialAccount
 from django.conf.global_settings import MEDIA_ROOT
+from forty_two_k.settings import MEDIA_URL
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
@@ -53,7 +54,7 @@ class RaceEvent(models.Model):
 
 
 class Photo(models.Model):
-    file = models.ImageField(upload_to=MEDIA_ROOT)
+    file = models.ImageField(upload_to=MEDIA_URL)
     # date = models.DateTimeField() upload date
     # date (photo date)
     # exif data
