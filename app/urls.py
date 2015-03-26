@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.conf.urls.static import static
 
 from app import views
 
@@ -21,4 +23,5 @@ urlpatterns = patterns(
     url(r'^orders/', login_required(views.OrdersView.as_view()), name='orders'),
     url(r'upload/', views.upload, name='jfu_upload'),
     url(r'^delete/(?P<pk>\d+)$', views.upload_delete, name='jfu_delete'),
-)
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# to serve the static FILES when Development

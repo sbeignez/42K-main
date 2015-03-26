@@ -6,52 +6,59 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
+
+See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from os.path import dirname
+
+# ================================================== #
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-
+# ================================================== #
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2mfv1#*zoyb%b+$7ug1y#d!zbe!!$lzf7-jpu^34e#5!niue&b'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# set this variable in EB console
-if os.environ.get('ENV_NAME') == "PROD":
-    DEBUG = False
+# A different DJANGO_SECRET_KEY is set as environment variable in EB for STAGE and PROD
+if 'DJANGO_SECRET_KEY' in os.environ:
+    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 else:
-    DEBUG = True
+    SECRET_KEY = '!c:-E$gXf9k){j%.B,}tKHW#s0m4XBVntWU^:|iI,!o+\A)C@8'
 
+# ================================================== #
+# Debug and Template Debug: DEV and TEST = True, STAGE and PROD = False
+# ENV_NAME is set as environment variable in EB
+if os.environ.get('ENV_NAME') == "PROD" or os.environ.get('ENV_NAME') == "STAGE":
+    DEBUG = TEMPLATE_DEBUG = False
+else:
+    DEBUG = TEMPLATE_DEBUG = True
 
-# Emails
-EMAIL_SUBJECT_PREFIX = "[42K]"
-SERVER_EMAIL = "42k-server@trophee.co"
-ADMINS = ('Leo', '42k-admin@trophee.co')
-
-
-
-TEMPLATE_DEBUG = True
-
+# ================================================== #
+# Only from test. stage. and www. OR local
+#
 ALLOWED_HOSTS = [
     '.42-k.com',
     'localhost',
     '127.0.0.1',
 ]
 
+# ================================================== #
+# Emails
+#
+EMAIL_SUBJECT_PREFIX = "[42K]"
+SERVER_EMAIL = "42k-server@trophee.co"
+ADMINS = ('Leo', '42k-admin@trophee.co')
 
+# ================================================== #
 # Application definition
-
+#
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    # To manage STATIC files (css, js and img)
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_filters',
@@ -89,9 +96,9 @@ ROOT_URLCONF = 'forty_two_k.urls'
 
 WSGI_APPLICATION = 'forty_two_k.wsgi.application'
 
-
+# ================================================== #
 # Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+# cf. https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
@@ -116,28 +123,29 @@ else:
         }
     }
 
+# ================================================== #
 # Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
-
+# cf. https://docs.djangoproject.com/en/1.7/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-
+USE_I18N = True
+USE_L10N = True
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
 
-USE_L10N = True
 
 USE_TZ = True
 
-
+# ================================================== #
+# Templates
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     # Required by allauth template tags
     "django.core.context_processors.request",
+    # for static files
     "django.core.context_processors.static",
     # allauth specific context processors
     "allauth.account.context_processors.account",
@@ -172,6 +180,7 @@ AWS_STORAGE_BUCKET_NAME = '42kcom'
 # AWS_SECRET_ACCESS_KEY =
 
 
+# STATIC FILES
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
 # it simple - just use this domain plus the path. (If this isn't set, things get complicated).

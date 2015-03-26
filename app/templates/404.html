@@ -3,7 +3,11 @@
     <div class="container">
         <h1>404</h1>
         <h2>Page not found</h2>
-        <p>We can't find the page you're looking for. Check out our <a href="support.html">Help Center</a> for help, or head back to <a href="http://wwww.42-k.com">home</a>.</p>
+        <p>Hmm, the page you’re looking for can’t be found.</p>
+        <p><small>The URL may be misspelled or the page you're looking for is no longer available.</small></p>
+        <p>Check out the <a href="{% url 'support' %}">Help Center</a> for help, or head back to <a href="http://wwww.42-k.com">home</a>.</p>
         <br>
+
+    <small></small>
     </div>
 {% endblock content%}
