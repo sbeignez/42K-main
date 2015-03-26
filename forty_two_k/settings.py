@@ -202,11 +202,11 @@ DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
 # STATIC FILES
 STATICFILES_STORAGE = 'forty_two_k.custom_storages.StaticStorage'
 STATIC_ROOT = 'static/'
+MEDIA_ROOT = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 STATICFILES_LOCATION = 'static'
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-MEDIA_ROOT = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 
 # ================================================== #
 # Payment
