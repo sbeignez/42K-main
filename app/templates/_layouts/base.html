@@ -91,28 +91,26 @@
                         </li>
                         -->
                      
-                        
                         <li class="dropdown"> <!-- USER DROP DOWN -->
                            {% if user.is_authenticated %}
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                              <img style="height:18px" src="{{ user.app.profile_image_url }}"/>
-                              {{ user.first_name }} {{ user.last_name }}
-                              <span class="caret"></span>
-                           </a>
-                           <ul class="dropdown-menu" role="menu">
-
-                              <li><a href="{% url 'orders' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Orders</a></li>
-                              <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a> </li>
-                              <li><a href="{% url 'account_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                              <li class="divider"></li>
-                              <li class="dropdown-header">Admin only:</li>
-                              <li><a href="{% url 'order' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Order page (direct)</a></li>
-                              <li><a href="{% url 'tagger' %}"><span class="glyphicon glyphicon-tags"></span> Tagger</a></li>
-                           </ul>
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                  <img style="height:18px" src="{{ user.app.profile_image_url }}"/>
+                                  {{ user.first_name }} {{ user.last_name }}
+                                  <span class="caret"></span>
+                               </a>
+                               <ul class="dropdown-menu" role="menu">
+                                  <li><a href="{% url 'orders' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Orders</a></li>
+                                  <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a> </li>
+                                  <li><a href="{% url 'account_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                  <li class="divider"></li>
+                                  <li class="dropdown-header">Admin only:</li>
+                                  <li><a href="{% url 'order' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Order page (direct)</a></li>
+                                  <li><a href="{% url 'tagger' %}"><span class="glyphicon glyphicon-tags"></span> Tagger</a></li>
+                               </ul>
                            {% else %}
-                           <a href="#">
-                              <span class="btn btn-primary btn-xs">Facebook log-in</span>
-                           </a>
+                               {% load socialaccount %}
+                               {% providers_media_js %}
+                               <a class="btn btn-primary btn-xs" href="{% provider_login_url "facebook" %}">Facebook log-in</a>
                            {% endif %}
                         </li>
                         

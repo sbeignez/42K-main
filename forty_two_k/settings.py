@@ -24,6 +24,11 @@ if 'DJANGO_SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 else:
     SECRET_KEY = '!c:-E$gXf9k){j%.B,}tKHW#s0m4XBVntWU^:|iI,!o+\A)C@8'
+# AWS Access: AIM user = 'django' / Key are in EB environment
+# for EB and for ???
+# AWS_ACCESS_KEY_ID = <SECRET>
+# AWS_SECRET_ACCESS_KEY = <SECRET>
+
 
 # ================================================== #
 # Debug and Template Debug: DEV and TEST = True, STAGE and PROD = False
@@ -70,7 +75,7 @@ INSTALLED_APPS = (
     'storages',
     # Payment (Stripe)
     'payments',
-    # Authentication (Facebook)
+    # allauth for Authentication (Facebook)
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -137,6 +142,7 @@ USE_TZ = True
 
 # ================================================== #
 # Templates
+#
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
@@ -161,7 +167,9 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
+# ================================================== #
 # auth and allauth settings
+#
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_EMAIL_VERIFICATION = False
@@ -171,52 +179,45 @@ SOCIALACCOUNT_PROVIDERS = {
         'METHOD': 'js_sdk'  # instead of 'oauth2'
     }
 }
-AWS_PRELOAD_METADATA = True
-AWS_STORAGE_BUCKET_NAME = '42kcom'
-
-# In AIM, user = django
-# To Secure http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers-ec2.html#customize-containers-format-container_commands
-# AWS_ACCESS_KEY_ID =
-# AWS_SECRET_ACCESS_KEY =
 
 
-# STATIC FILES
+# ================================================== #
+# Payment
+#
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
 # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
 # This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
 # We also use it in the next setting.
+AWS_PRELOAD_METADATA = True
+AWS_STORAGE_BUCKET_NAME = '42kcom'
 AWS_S3_CUSTOM_DOMAIN = 's3-ap-southeast-1.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
 
-STATICFILES_LOCATION = 'static'
-MEDIAFILES_LOCATION = 'media'
-
-STATICFILES_STORAGE = 'forty_two_k.custom_storages.StaticStorage'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-
-MEDIA_ROOT = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
+
+# STATIC FILES
+STATICFILES_STORAGE = 'forty_two_k.custom_storages.StaticStorage'
 STATIC_ROOT = 'static/'
+STATICFILES_LOCATION = 'static'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+MEDIA_ROOT = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+MEDIAFILES_LOCATION = 'media'
 
+# ================================================== #
+# Payment
+#
 PAYMENT_BASE_URL = 'http://42k-main-dev.elasticbeanstalk.com/'
-
 PAYMENT_MODEL = 'app.Payment'
-
 PAYMENT_VARIANTS = {
 #    'default': ('payments.dummy.DummyProvider', {}),
     'stripe': ('payments.stripe.StripeProvider', {
         'secret_key': 'sk_test_R0wdUmJ6ow8aK3KZB2yEfesW',
         'public_key': 'pk_test_k4aH2K0TqtPi7RTWcIisUGVi'}),
-#    'paypal': ('payments.paypal.PaypalProvider', {
-#        'client_id': 'AZB1HYckK0hd-LptuIXplw39ntMsCm5CvS-ePMdlICbrhPCrmZIZEh9cu9Wz-Xs556QP6jajdB3jcFMo',
-#        'secret': 'EDMbCYexxu36FmqrEKURw-24QHJMIpgrBXoXQE77Mo7T6RXLlM5W0fNOUphRYytkPAkDVxCECrVgmgWR',
-#        'endpoint': 'https://api.sandbox.paypal.com',
-#        'capture': False})
 }
 
 LOGGING = {
