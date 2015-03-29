@@ -171,7 +171,7 @@ def upload(request):
     return UploadResponse( request, file_dict )
 
 @require_POST
-def upload_delete( request, pk ):
+def upload_delete(request, pk):
     success = True
     try:
         instance = Photo.objects.get( pk = pk )
@@ -186,7 +186,7 @@ def upload_delete( request, pk ):
     except Photo.DoesNotExist:
         success = False
 
-    return JFUResponse( request, success )
+    return JFUResponse(request, success)
 
 
 
@@ -212,7 +212,6 @@ class PagedFilteredTableView(SingleTableView):
         return context
 
 
-@login_required
 class RunnerView(PagedFilteredTableView):
     model = RaceEvent
     table_class = RaceTable
