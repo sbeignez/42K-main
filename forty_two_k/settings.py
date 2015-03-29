@@ -25,7 +25,7 @@ if 'DJANGO_SECRET_KEY' in os.environ:
 else:
     SECRET_KEY = '!c:-E$gXf9k){j%.B,}tKHW#s0m4XBVntWU^:|iI,!o+\A)C@8'
 # AWS Access: AIM user = 'django' / Key are in EB environment
-# for EB and for ???
+# for EB and for photo upload
 # AWS_ACCESS_KEY_ID = <SECRET>
 # AWS_SECRET_ACCESS_KEY = <SECRET>
 

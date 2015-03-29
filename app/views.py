@@ -65,7 +65,6 @@ def RunnerInputbib(request):
     return render(request, 'app/runner-inputbib.html')
 
 
-@login_required
 class TaggerView(generic.ListView):
     template_name = 'app/tagger.html'
     context_object_name = 'races'
@@ -79,7 +78,6 @@ def tag(request):
     return render(request, 'app/tag.html')
 
 
-@login_required
 class OrdersView(generic.ListView):
     template_name = 'app/orders.html'
     context_object_name = 'orders'
@@ -88,7 +86,7 @@ class OrdersView(generic.ListView):
         return Order.objects.filter(user=self.request.user.id)
 
 
-@login_required
+
 class UploadView(generic.TemplateView):
     template_name = 'app/upload.html'
 
@@ -142,7 +140,7 @@ def order(request):
     return order_details(request, payment_id=payment.id)
 
 
-@login_required
+
 @require_POST
 def upload(request):
 
