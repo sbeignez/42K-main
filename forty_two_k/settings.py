@@ -182,7 +182,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 
 # ================================================== #
-# Payment
+# Storage and Static files
 #
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep

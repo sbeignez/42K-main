@@ -22,6 +22,8 @@ from raceFuncs import RaceFilter, RaceTable
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+from django.contrib.auth.decorators import login_required
+
 
 def handler404(request):
     response = render_to_response('404.html', {},
@@ -40,21 +42,30 @@ def handler500(request):
 def home(request):
     return render(request, 'app/home.html')
 
+
 def terms(request):
     return render(request, 'app/tnc.html')
+
 
 def support(request):
     return render(request, 'app/support.html')
 
+
 def feedback(request):
     return render(request, 'app/feedback.html')
 
+
+@login_required
 def RunnerOverview(request):
     return render(request, 'app/runner-overview.html')
 
+
+@login_required
 def RunnerInputbib(request):
     return render(request, 'app/runner-inputbib.html')
 
+
+@login_required
 class TaggerView(generic.ListView):
     template_name = 'app/tagger.html'
     context_object_name = 'races'
@@ -62,9 +73,13 @@ class TaggerView(generic.ListView):
     def get_queryset(self):
         return RaceEvent.objects.all()
 
+
+@login_required
 def tag(request):
     return render(request, 'app/tag.html')
 
+
+@login_required
 class OrdersView(generic.ListView):
     template_name = 'app/orders.html'
     context_object_name = 'orders'
@@ -72,6 +87,8 @@ class OrdersView(generic.ListView):
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user.id)
 
+
+@login_required
 class UploadView(generic.TemplateView):
     template_name = 'app/upload.html'
 
@@ -81,6 +98,8 @@ class UploadView(generic.TemplateView):
         context['races'] = RaceEvent.objects.all()
         return context
 
+
+@login_required
 def order_details(request, payment_id):
     payment = get_object_or_404(get_payment_model(), id=payment_id)
     payment.total = sum(p.price for p in payment.get_purchased_items())
@@ -94,6 +113,7 @@ def order_details(request, payment_id):
     return TemplateResponse(request, 'app/order.html', {'form': form, 'payment': payment, 'photos': photos})
 
 
+@login_required
 def order(request):
     photos = Photo.objects.all()
     Payment = get_payment_model()
@@ -122,6 +142,7 @@ def order(request):
     return order_details(request, payment_id=payment.id)
 
 
+@login_required
 @require_POST
 def upload(request):
 
@@ -132,7 +153,7 @@ def upload(request):
     file = upload_receive( request )
     raceid = request.POST.get("raceevent", "")
     raceevent = RaceEvent.objects.get(id=1)
-    instance = Photo( file = file, race=raceevent)
+    instance = Photo(file=file, race=raceevent)
     instance.save()
 
     basename = os.path.basename( instance.file.path )
@@ -190,6 +211,8 @@ class PagedFilteredTableView(SingleTableView):
         context['races'] = RaceEvent.objects.all()
         return context
 
+
+@login_required
 class RunnerView(PagedFilteredTableView):
     model = RaceEvent
     table_class = RaceTable
@@ -199,6 +222,8 @@ class RunnerView(PagedFilteredTableView):
     formhelper_class.field_template = 'bootstrap3/layout/inline_field.html'
     formhelper_class.form_class = 'form-inline'
 
+
+@login_required
 def addRace(request):
     if request.POST:
         name = request.POST['name']
