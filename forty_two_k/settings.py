@@ -209,8 +209,8 @@ MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 
 # ================================================== #
-# Payment
-#
+# Payments
+# cf. django-payments
 PAYMENT_BASE_URL = 'http://42k-main-dev.elasticbeanstalk.com/'
 PAYMENT_MODEL = 'app.Payment'
 PAYMENT_VARIANTS = {
