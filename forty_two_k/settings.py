@@ -38,6 +38,7 @@ if os.environ.get('ENV_NAME') == "PROD" or os.environ.get('ENV_NAME') == "STAGE"
 else:
     DEBUG = TEMPLATE_DEBUG = True
 
+
 # ================================================== #
 # Only from test. stage. and www. OR local
 #
@@ -47,12 +48,14 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
+
 # ================================================== #
 # Emails
 #
 EMAIL_SUBJECT_PREFIX = "[42K]"
 SERVER_EMAIL = "42k-server@trophee.co"
 ADMINS = ('Leo', '42k-admin@trophee.co')
+
 
 # ================================================== #
 # Application definition
@@ -98,8 +101,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'forty_two_k.urls'
-
 WSGI_APPLICATION = 'forty_two_k.wsgi.application'
+
 
 # ================================================== #
 # Database
@@ -128,6 +131,7 @@ else:
         }
     }
 
+
 # ================================================== #
 # Internationalization
 # cf. https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -135,10 +139,8 @@ LANGUAGE_CODE = 'en-us'
 USE_I18N = True
 USE_L10N = True
 TIME_ZONE = 'UTC'
-
-
-
 USE_TZ = True
+
 
 # ================================================== #
 # Templates
@@ -167,10 +169,12 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
+
 # ================================================== #
 # auth and allauth settings
 #
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_EMAIL_VERIFICATION = False
 SOCIALACCOUNT_PROVIDERS = {
@@ -191,6 +195,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # We also use it in the next setting.
 AWS_PRELOAD_METADATA = True
 AWS_STORAGE_BUCKET_NAME = '42kcom'
+# S3_URL = 'http://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME ?
 AWS_S3_CUSTOM_DOMAIN = 's3-ap-southeast-1.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
 
 DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
@@ -208,18 +213,30 @@ STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 
+
 # ================================================== #
 # Payments
 # cf. django-payments
 PAYMENT_BASE_URL = 'http://42k-main-dev.elasticbeanstalk.com/'
 PAYMENT_MODEL = 'app.Payment'
-PAYMENT_VARIANTS = {
-#    'default': ('payments.dummy.DummyProvider', {}),
-    'stripe': ('payments.stripe.StripeProvider', {
-        'secret_key': 'sk_test_R0wdUmJ6ow8aK3KZB2yEfesW',
-        'public_key': 'pk_test_k4aH2K0TqtPi7RTWcIisUGVi'}),
-}
 
+if os.environ.get("STRIPE_SECRET_KEY"):
+    PAYMENT_VARIANTS = {
+        'stripe': ('payments.stripe.StripeProvider', {
+            'secret_key': os.environ.get("STRIPE_SECRET_KEY"),
+            'public_key': 'pk_test_k4aH2K0TqtPi7RTWcIisUGVi'}),
+    }
+else:
+    PAYMENT_VARIANTS = {
+        'stripe': ('payments.stripe.StripeProvider', {
+            'secret_key': 'sk_test_R0wdUmJ6ow8aK3KZB2yEfesW',
+            'public_key': 'pk_test_k4aH2K0TqtPi7RTWcIisUGVi'}),
+    }
+
+
+# ================================================== #
+# Logging
+#
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

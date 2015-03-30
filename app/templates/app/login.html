@@ -1,0 +1,38 @@
+{% extends "_layouts/base.html" %}
+{% load staticfiles %}
+{% load render_table from django_tables2 %}
+{% block css %}
+    {{block.super}}
+
+    <link rel="stylesheet"  href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
+
+{% endblock css %}
+{% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
+{% block page_class %}home-page{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Get your marathon photos</h3>
+                <p>You can find here your marathon photos, uploaded by other supporters photographers.</p>
+                <h3>Be notified when new photos are avaiable</h3>
+                <p>You can register before or after the race.</p>
+                <p>Add you'll received automatically a notification everytime new photos are uploaded.</p>
+                <h3>Find your own photos</h3>
+                <p>We tag all the photos, so you don't have to search! Just input your race number, which appears on the BIB you will wear for the race.</p>
+                <p>If you don't know your number yet, you can register first. We'll help you to find it later.</p>
+                <h3>Share photos with your friends</h3>
+                <p>Keep your memories for yourself or share your photos to your Facebook friends. Only the ones you like.</p>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-xs-12 col-sm-12'>
+                {% load socialaccount %}
+                {% providers_media_js %}
+                <a class="btn btn-primary btn-md" href="{% provider_login_url "facebook" %}">
+                    Login with Facebook
+                </a>
+            </div>
+        </div>
+{% endblock content %}

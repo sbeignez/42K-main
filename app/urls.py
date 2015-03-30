@@ -12,6 +12,8 @@ urlpatterns = patterns(
     url(r'^support/$', 'support', name='support'),
     url(r'^feedback/$', 'feedback', name='feedback'),
 
+    url(r'^login/$', 'login', name='login'),
+
     url(r'^runner/runner-overview.html', 'RunnerOverview', name='runner-overview'),
     url(r'^runner/input-bib/$', 'RunnerInputbib', name='runner-inputbib'),
     url(r'^runner/$', login_required(views.RunnerView.as_view()), name='runner'),
@@ -24,4 +26,6 @@ urlpatterns = patterns(
     url(r'upload/', views.upload, name='jfu_upload'),
     url(r'^delete/(?P<pk>\d+)$', views.upload_delete, name='jfu_delete'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-# to serve the static FILES when Development
+# to serve the static FILES when in Development
+
+

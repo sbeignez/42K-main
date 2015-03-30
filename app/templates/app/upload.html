@@ -1,27 +1,16 @@
 {% extends "_layouts/base.html" %}
 {% load staticfiles %}
-  {% block cdn_js %}{% endblock cdn_js %}
-{% block css %}
-{{block.super}}
-<style>
-   /* Move down content because we have a fixed navbar that is 50px tall */
-   body {
-   padding-top: 50px;
-   padding-bottom: 20px;
-   }
-</style>
-{% endblock css %}
+{% block cdn_js %}{% endblock cdn_js %}
+
 {% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
 {% block page_class %}home-page{% endblock %}
+
 {% block content %}
  <div class='container'>
-
     <div class='row'>
       <h1>Submit your photos <small>- upload photos album</small></h1>
     </div>
-
-{% load jfutags %}
-{% jfu 'app/photo_upload_form.html' %}
-
+    {% load jfutags %}
+    {% jfu 'app/photo_upload_form.html' %}
  </div>
-{% endblock %}
+{% endblock content %}

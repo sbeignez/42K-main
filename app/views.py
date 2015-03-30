@@ -55,6 +55,10 @@ def feedback(request):
     return render(request, 'app/feedback.html')
 
 
+def login(request):
+    return render(request, 'app/login.html')
+
+
 @login_required
 def RunnerOverview(request):
     return render(request, 'app/runner-overview.html')
