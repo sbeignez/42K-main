@@ -17,6 +17,7 @@ from os.path import dirname
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+
 # ================================================== #
 # SECURITY WARNING: keep the secret key used in production secret!
 # A different DJANGO_SECRET_KEY is set as environment variable in EB for STAGE and PROD
@@ -24,10 +25,13 @@ if 'DJANGO_SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 else:
     SECRET_KEY = '!c:-E$gXf9k){j%.B,}tKHW#s0m4XBVntWU^:|iI,!o+\A)C@8'
-# AWS Access: AIM user = 'django' / Key are in EB environment
-# for EB and for photo upload
-# AWS_ACCESS_KEY_ID = <SECRET>
-# AWS_SECRET_ACCESS_KEY = <SECRET>
+
+# AWS Access for buckets
+# in AWS EB environment: AIM user = 'django'
+if 'AWS_ACCESS_KEY_ID' not in os.environ:
+    AWS_ACCESS_KEY_ID = 'AKIAJ7TXSIPM4CLSP6CA'
+if 'AWS_SECRET_ACCESS_KEY' not in os.environ:
+    AWS_SECRET_ACCESS_KEY = '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'
 
 
 # ================================================== #
@@ -187,32 +191,58 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # ================================================== #
 # Storage and Static files
-#
+# Domain, buckets and root folders for Static files and Media files
+
+
+# DOMAIN (why not: 'http://s3.amazonaws.com/%s'?)
+AWS_S3_DOMAIN = 's3-ap-southeast-1.amazonaws.com'
+
+# AWS_STORAGE_BUCKET_NAME = ??
+# AWS_S3_CUSTOM_DOMAIN = '%s/%s' % (AWS_S3_DOMAIN, AWS_STORAGE_BUCKET_NAME)
+
+# BUCKETS
+if os.environ.get('ENV_NAME') == "PROD":
+    ENV = "prod"
+elif os.environ.get('ENV_NAME') == "STAGE":
+    ENV = "stage"
+elif os.environ.get('ENV_NAME') == "TEST":
+    ENV = "test"
+else:
+    ENV = "test"
+    # should create a bucket 42k-static-dev for 'dev' (or serve locally)
+
+AWS_STORAGE_BUCKET_NAME_STATIC = "42k-static-%s" % ENV
+AWS_STORAGE_BUCKET_NAME_MEDIA = "42k-media-%s" % ENV
+
+# Sub FOLDERS (directly at root folder)
+STATICFILES_LOCATION = ''
+MEDIAFILES_LOCATION = ''
+
+# URLs ("https://DOMAIN/BUCKET/FOLDER")
+STATIC_ROOT = "https://%s/%s/%s" % (AWS_S3_DOMAIN, AWS_STORAGE_BUCKET_NAME_STATIC, STATICFILES_LOCATION)
+STATIC_URL = "https://%s/%s/%s" % (AWS_S3_DOMAIN, AWS_STORAGE_BUCKET_NAME_STATIC, STATICFILES_LOCATION)
+
+MEDIA_ROOT = "https://%s/%s/%s" % (AWS_S3_DOMAIN, AWS_STORAGE_BUCKET_NAME_MEDIA, MEDIAFILES_LOCATION)
+MEDIA_URL = "https://%s/%s/%s" % (AWS_S3_DOMAIN, AWS_STORAGE_BUCKET_NAME_MEDIA, MEDIAFILES_LOCATION)
+
+
+# Django-storage
+DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
+STATICFILES_STORAGE = 'forty_two_k.custom_storages.StaticStorage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+# ???
+AWS_PRELOAD_METADATA = True
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
 # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
 # This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
 # We also use it in the next setting.
-AWS_PRELOAD_METADATA = True
-AWS_STORAGE_BUCKET_NAME = '42kcom'
-# S3_URL = 'http://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME ?
-AWS_S3_CUSTOM_DOMAIN = 's3-ap-southeast-1.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
 
-DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-
-# STATIC FILES
-STATICFILES_STORAGE = 'forty_two_k.custom_storages.StaticStorage'
-STATIC_ROOT = 'static/'
-MEDIA_ROOT = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-STATICFILES_LOCATION = 'static'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-MEDIAFILES_LOCATION = 'media'
-MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-
 
 # ================================================== #
 # Payments
