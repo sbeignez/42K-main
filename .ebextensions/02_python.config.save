@@ -5,3 +5,7 @@
     leader_only: true
 
 command: "/opt/python/run/venv/bin/python /opt/python/ondeck/app/manage.py migrate --noinput"
+
+
+  04_collectstatic:
+    command: "source /opt/python/run/venv/bin/activate && python manage.py collectstatic --noinput"
