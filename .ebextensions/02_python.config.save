@@ -1,3 +1,16 @@
+container_commands:
+  01_migrate:
+    command: "source /opt/python/run/venv/bin/activate && python manage.py migrate --noinput"
+    leader_only: true
+  02_createsu:
+    command: "source /opt/python/run/venv/bin/activate && python manage.py createsu"
+    leader_only: true
+  03_createfacebook:
+    command: "source /opt/python/run/venv/bin/activate && python manage.py createfacebook"
+    leader_only: true
+
+
+
 
 
   01_makemigrations:
@@ -5,3 +18,34 @@
     leader_only: true
 
 command: "/opt/python/run/venv/bin/python /opt/python/ondeck/app/manage.py migrate --noinput"
+
+
+  04_collectstatic:
+    command: "source /opt/python/run/venv/bin/activate && python manage.py collectstatic --noinput"
+
+
+packages:
+  yum:
+    libmemcached-devel: '0.31'
+
+container_commands:
+  01collectstatic:
+    command: "django-admin.py collectstatic --noinput"
+  02migrate:
+    command: "django-admin.py migrate"
+    leader_only: true
+  99customize:
+    command: "scripts/customize.sh"
+
+# You can specify any key-value pairs in the aws:elasticbeanstalk:application:environment namespace and it will be
+# passed in as environment variables on your EC2 instances
+option_settings:
+  "aws:elasticbeanstalk:application:environment":
+    DJANGO_SETTINGS_MODULE: "djproject.settings"
+    "application_stage": "staging"
+  "aws:elasticbeanstalk:container:python":
+    WSGIPath: djproject/wsgi.py
+    NumProcesses: 3
+    NumThreads: 20
+  "aws:elasticbeanstalk:container:python:staticfiles":
+    "/static/": "static/"
