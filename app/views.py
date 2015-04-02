@@ -1,9 +1,12 @@
 from decimal import Decimal
+from django.core.files.base import ContentFile
+from django.contrib import messages
+from json import load
+from urllib import urlopen
 
 from boto.s3.bucket import Bucket
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
-from django.http import HttpResponse
 import os
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -13,7 +16,7 @@ from django.views.decorators.http import require_POST
 from jfu.http import upload_receive, UploadResponse, JFUResponse
 from payments import get_payment_model, RedirectNeeded
 
-from app.forms import  RaceListFormHelper, NewRaceForm
+from app.forms import RaceListFormHelper, NewRaceForm
 from app.models import RaceEvent, Order, Photo, OrderItem
 from forty_two_k import settings
 from raceFuncs import RaceFilter, RaceTable
@@ -98,7 +101,35 @@ class UploadView(generic.TemplateView):
         context = super( UploadView, self ).get_context_data( **kwargs )
         context['accepted_mime_types'] = ['image/*']
         context['races'] = RaceEvent.objects.all()
+        album = self.request.REQUEST.get('album')
+        if album:
+            token = self.request.user.app.facebooktoken
+            context['photos'] = load(urlopen(
+                'https://graph.facebook.com/%s/photos?access_token='
+                % album + token))
+        elif 'facebook' in self.request.REQUEST:
+            token = self.request.user.app.facebooktoken
+            context['albums'] = albums = load(urlopen(
+                'https://graph.facebook.com/me/albums?access_token=' + token))
+            if 'error' in albums:
+                raise RuntimeError(
+                    albums['error'])  # TODO: replace with messages
         return context
+
+    def post(self, request):
+        album = self.request.REQUEST.get('album')
+        token = self.request.user.app.facebooktoken
+        photos = load(urlopen(
+            'https://graph.facebook.com/%s/photos?access_token='
+            % album + token))
+        for p in photos['data']:
+            if self.request.REQUEST['upload-' + p['id']] == 'on':
+                race = RaceEvent.objects.get(
+                    pk=self.request.REQUEST['race-' + p['id']])
+                Photo.objects.create(file=ContentFile(urlopen(
+                    p['source']).read(), name='photo.jpg'), race=race)
+        messages.success(request, 'Photos added.')
+        return redirect('/')
 
 
 @login_required
@@ -154,7 +185,7 @@ def upload(request):
     # 'file' may be a list of files.
     file = upload_receive( request )
     raceid = request.POST.get("raceevent", "")
-    raceevent = RaceEvent.objects.get(id=1)
+    raceevent = RaceEvent.objects.get(id=raceid)
     instance = Photo(file=file, race=raceevent)
     instance.save()
 

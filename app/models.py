@@ -19,6 +19,11 @@ class AppUser(models.Model):
     user = models.OneToOneField(User, related_name='app')
     role = models.CharField(max_length=15, choices=ROLES, default='runner')
 
+    @property
+    def facebooktoken(self):
+        return self.user.socialaccount_set.first(
+        ).socialtoken_set.first().token
+
     def profile_image_url(self):
         fb_uid = SocialAccount.objects.filter(user_id=self.user.id, provider='facebook')
 
