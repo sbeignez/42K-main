@@ -107,7 +107,7 @@
                                   <li><a href="{% url 'order' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Order page (direct)</a></li>
                                   <li><a href="{% url 'tagger' %}"><span class="glyphicon glyphicon-tags"></span> Tagger</a></li>
                                </ul>
-                           {% else %}
+                            {% elif request %}
                                {% load socialaccount %}
                                {% providers_media_js %}
                                <a class="btn btn-primary btn-xs" href="{% provider_login_url "facebook" %}">Facebook log-in</a>

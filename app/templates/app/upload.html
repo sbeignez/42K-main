@@ -10,7 +10,41 @@
     <div class='row'>
       <h1>Submit your photos <small>- upload photos album</small></h1>
     </div>
+    {% if albums %}
+    {# pick facebook album #}
+    {% for album in albums.data %}
+    <p><a href="?album={{album.id}}">{{album.name}}</a></p>
+    {% endfor %}
+    {% elif photos %}
+    {# pick facebook album photos #}
+    <form method=POST>
+        {% csrf_token %}
+        <div class="row">
+            {% for p in photos.data %}
+            <div class="col-xs-6 col-md-3">
+                <div class="thumbnail">
+                    <img src="{{p.source}}" alt="...">
+                    <div class="caption">
+                        <input type=checkbox name="upload-{{p.id}}">
+                        <select name="race-{{p.id}}">
+                            {% for race in races %}
+                            <option value="{{ race.id }}">{{ race.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <p>
+        <input type=submit value=Submit class='btn btn-primary'>
+        </p>
+    </form>
+    {% else %}
+    {# direct upload #}
     {% load jfutags %}
     {% jfu 'app/photo_upload_form.html' %}
- </div>
+    <p>Or <a href="?facebook">add photos from Facebook album</a></p>
+    {% endif %}
+</div>
 {% endblock content %}
