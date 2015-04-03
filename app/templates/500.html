@@ -3,9 +3,9 @@
     <div class="container">
         <h1>500</h1>
         <h2>Internal server error</h2>
-        <p>Sorry, something wrong happened! Can you let us know how this happened via the <a href="feedback.html">feedback</a> center, or by sending an <a href="mailto:help@42k.photos?subject=I just saw an Error 500">email</a>.
+        <p>Sorry, something wrong happened! Can you let us know how this happened via the <a href="{% url 'feedback' %}">feedback</a> center, or by sending an <a href="mailto:help@42k.photos?subject=I just saw an Error 500">email</a>.
         </p>
-        <p>You can also head back directly to <a href="http://wwww.42-k.com">home</a>.</p>
+        <p>You can also head back directly to <a href="{% url 'home' %}">home</a>.</p>
         <br>
     </div>
 {% endblock content%}
