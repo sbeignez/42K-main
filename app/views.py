@@ -194,8 +194,8 @@ def upload(request):
         'name' : basename,
         'size' : file.size,
 
-        'url': settings.MEDIA_URL + basename,
-        'thumbnailUrl': settings.MEDIA_URL + basename,
+        'url': instance.file.url,
+        'thumbnailUrl': instance.file.url,
 
         'deleteUrl': reverse('jfu_delete', kwargs = { 'pk': instance.pk }),
         'deleteType': 'POST',

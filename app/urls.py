@@ -25,7 +25,7 @@ urlpatterns = patterns(
     url(r'^orders/', login_required(views.OrdersView.as_view()), name='orders'),
     url(r'upload/', views.upload, name='jfu_upload'),
     url(r'^delete/(?P<pk>\d+)$', views.upload_delete, name='jfu_delete'),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # to serve the static FILES when in Development
 
 
