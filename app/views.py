@@ -195,7 +195,7 @@ def upload(request):
         'size' : file.size,
 
         'url': instance.file.url,
-        'thumbnailUrl': instance.file.url,
+        'thumbnailUrl': instance.thumb.url,
 
         'deleteUrl': reverse('jfu_delete', kwargs = { 'pk': instance.pk }),
         'deleteType': 'POST',
@@ -207,15 +207,7 @@ def upload(request):
 def upload_delete(request, pk):
     success = True
     try:
-        instance = Photo.objects.get( pk = pk )
-
-        conn = S3Connection(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
-        b = Bucket(conn, settings.AWS_STORAGE_BUCKET_NAME)
-        k = Key(b)
-        k.key = instance.file.path
-        b.delete_key(k)
-
-        instance.delete()
+        Photo.objects.get(pk=pk).delete()
     except Photo.DoesNotExist:
         success = False
 
