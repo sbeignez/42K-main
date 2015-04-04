@@ -28,10 +28,8 @@ else:
 
 # AWS Access for buckets
 # in AWS EB environment: AIM user = 'django'
-if 'AWS_ACCESS_KEY_ID' not in os.environ:
-    AWS_ACCESS_KEY_ID = 'AKIAJ7TXSIPM4CLSP6CA'
-if 'AWS_SECRET_ACCESS_KEY' not in os.environ:
-    AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'AKIAJ7TXSIPM4CLSP6CA')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY', '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')
 
 
 # ================================================== #
