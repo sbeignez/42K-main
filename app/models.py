@@ -1,10 +1,12 @@
 import hashlib
+
 from allauth.socialaccount.models import SocialAccount
 from django.conf.global_settings import MEDIA_ROOT
-from forty_two_k.settings import MEDIA_URL
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries.fields import CountryField
+from imagekit.models import ImageSpecField
+from imagekit.processors import SmartResize
 # from geoposition.fields import GeopositionField
 from payments.models import BasePayment
 
@@ -60,6 +62,7 @@ class RaceEvent(models.Model):
 
 class Photo(models.Model):
     file = models.ImageField(upload_to=MEDIA_ROOT, null=True, blank=True)
+    thumb = ImageSpecField(source='file', processors=[SmartResize(256, 256)])
     # date = models.DateTimeField() upload date
     # date (photo date)
     # exif data
@@ -111,5 +114,3 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return self.date + " " + self.bib
-
-
