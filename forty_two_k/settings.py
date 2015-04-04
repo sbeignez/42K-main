@@ -15,7 +15,7 @@ from os.path import dirname, join
 
 # ================================================== #
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = dirname(dirname(__file__))
 
 
 # ================================================== #
@@ -199,17 +199,19 @@ AWS_STORAGE_BUCKET_NAME_STATIC = "42k-static-%s" % ENV.lower()
 AWS_STORAGE_BUCKET_NAME_MEDIA = "42k-media-%s" % ENV.lower()
 
 # URLs ("https://DOMAIN/BUCKET/FOLDER")
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+STATIC_ROOT = join(BASE_DIR, 'static')
+MEDIA_ROOT = join(BASE_DIR, 'media')
 
 # Django-storage
 # dev serve locally
-if ENV != 'dev':
+if ENV == 'dev':
+    STATIC_URL = '/static/'
+    MEDIA_URL = '/media/'
+else:
     DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
     STATICFILES_STORAGE = 'forty_two_k.custom_storages.StaticStorage'
+    STATIC_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME_STATIC
+    MEDIA_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME_MEDIA
 # STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # Absolute path to the directory static files should be collected to.
@@ -263,3 +265,6 @@ LOGGING = {
         },
     }
 }
+
+if ENV == 'dev':
+    INSTALLED_APPS += 'debug_toolbar',
