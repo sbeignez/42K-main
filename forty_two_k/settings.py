@@ -16,7 +16,10 @@ from os.path import dirname, join
 # ================================================== #
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = dirname(dirname(__file__))
-
+# ENV_NAME is set as environment variable in EB
+ENV = os.environ.get('ENV_NAME')
+if ENV not in ("PROD", "STAGE", "TEST"):
+    ENV = "DEV"
 
 # ================================================== #
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -34,8 +37,8 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY', 'ziYXzHAcMWWU5TL+OnQ6YT
 
 # ================================================== #
 # Debug and Template Debug: DEV and TEST = True, STAGE and PROD = False
-# ENV_NAME is set as environment variable in EB
-if os.environ.get('ENV_NAME') == "PROD" or os.environ.get('ENV_NAME') == "STAGE":
+#
+if ENV not in ("PROD", "STAGE"):
     DEBUG = TEMPLATE_DEBUG = False
 else:
     DEBUG = TEMPLATE_DEBUG = True
@@ -190,10 +193,6 @@ SOCIALACCOUNT_PROVIDERS = {
 # Domain, buckets and root folders for Static files and Media files
 
 # BUCKETS
-ENV = os.environ.get('ENV_NAME')
-if ENV not in ("PROD", "STAGE", "TEST"):
-    ENV = "dev"
-
 AWS_STORAGE_BUCKET_NAME_STATIC = "42k-static-%s" % ENV.lower()
 AWS_STORAGE_BUCKET_NAME_MEDIA = "42k-media-%s" % ENV.lower()
 
@@ -203,8 +202,8 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 
 # Django-storage
 # dev serve locally
-if ENV == 'dev':
-    STATIC_URL = '/static/'
+if ENV == 'DEV':
+    STATIC_URL = 'static/'
     MEDIA_URL = '/media/'
 else:
     DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
@@ -265,5 +264,5 @@ LOGGING = {
     }
 }
 
-if ENV == 'dev':
+if ENV == 'DEV':
     INSTALLED_APPS += 'debug_toolbar',
