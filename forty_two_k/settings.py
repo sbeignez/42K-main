@@ -58,7 +58,6 @@ EMAIL_SUBJECT_PREFIX = "[42K]"
 SERVER_EMAIL = "42k-server@trophee.co"
 ADMINS = (
     ('Leo', '42k-admin@trophee.co'),
-    ('Uri', 'yurii.zolotko@gmail.com')
 )
 
 
