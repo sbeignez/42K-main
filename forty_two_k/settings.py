@@ -62,7 +62,7 @@ SERVER_EMAIL = "42k-server@trophee.co"
 ADMINS = (
     ('Leo', '42k-admin@trophee.co'),
 )
-
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # ================================================== #
 # Application definition

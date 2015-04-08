@@ -7,7 +7,9 @@ from app import views
 
 urlpatterns = patterns(
     'app.views',
-    url(r'^$', 'home', name='home'),
+    url(r'^$', 'landing', name='landing'),
+
+    url(r'^home/$', 'home', name='home'),
     url(r'^terms/$', 'terms', name='terms'),
     url(r'^support/$', 'support', name='support'),
     url(r'^feedback/$', 'feedback', name='feedback'),
@@ -25,7 +27,7 @@ urlpatterns = patterns(
     url(r'^orders/', login_required(views.OrdersView.as_view()), name='orders'),
     url(r'upload/', views.upload, name='jfu_upload'),
     url(r'^delete/(?P<pk>\d+)$', views.upload_delete, name='jfu_delete'),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # to serve the static FILES when in Development
 
 

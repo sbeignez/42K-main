@@ -41,6 +41,9 @@ def handler500(request):
     response.status_code = 500
     return response
 
+def landing(request):
+    return render(request, 'app/landing-page.html')
+
 
 def home(request):
     return render(request, 'app/home.html')
