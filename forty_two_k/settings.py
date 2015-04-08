@@ -220,7 +220,7 @@ else:
 # ================================================== #
 # Payments
 # cf. django-payments
-PAYMENT_BASE_URL = 'http://42k-main-dev.elasticbeanstalk.com/'
+PAYMENT_BASE_URL = 'http://www.42-k.com/'
 PAYMENT_MODEL = 'app.Payment'
 
 if os.environ.get("STRIPE_SECRET_KEY"):

@@ -4,8 +4,47 @@
 
 {% block page_class %}home-page{% endblock %}
 {% block content %}
-<div class="container">
-   <div class="row jumbotron">
+
+    <div class="row clearfix">
+		<div class="col-sm-4 column">
+			<img alt="140x140" src="http://lorempixel.com/150/100/" class="img-thumbnail" />
+			<h2>
+				Heading
+			</h2>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				<a class="btn" href="#">View details »</a>
+			</p>
+		</div>
+		<div class="col-sm-4 column">
+            <img alt="140x140" src="http://lorempixel.com/151/100/" class="img-thumbnail" />
+			<h2>
+				Heading
+			</h2>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				<a class="btn" href="#">View details »</a>
+			</p>
+		</div>
+		<div class="col-sm-4 column">
+            <img alt="140x140" src="http://lorempixel.com/152/100/" class="img-thumbnail" />
+			<h2>
+				Heading
+			</h2>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				<a class="btn" href="#">View details »</a>
+			</p>
+		</div>
+	</div>
+    <div class="row jumbotron">
+        <div class="container">
             <div class='col-xs-12 col-sm-12'>
                 {% load socialaccount %}
                 {% providers_media_js %}
@@ -13,41 +52,6 @@
                     Login with Facebook
                 </a>
             </div>
-   </div>
-    <div class="row">
-        <div class='col-xs-12 col-sm-4'><img src="http://placehold.it/300x200?text=AA" width="100%"></div>
-        <div class='col-xs-12 col-sm-8'><h3>Point 1</h3><p>Lorem ipsum</p></div>
+        </div>
     </div>
-    <div class="row">
-        <div class='col-xs-12 col-sm-8'><h3>Point 1</h3><p>Lorem ipsum</p></div>
-        <div class='col-xs-12 col-sm-4'><img src="http://placehold.it/300x200?text=AA" width="100%"></div>
-    </div>
-    <div class="row">
-        <div class='col-xs-12 col-sm-4'><img src="http://placehold.it/300x200?text=AA" width="100%"></div>
-        <div class='col-xs-12 col-sm-8'><h3>Point 1</h3><p>Lorem ipsum</p></div>
-    </div>
-       <div class="row jumbotron">
-            <div class='col-xs-12 col-sm-12'>
-                <h1>Login</h1>
-                <p>Veruivberoivb viberoivbe voeirbo</p>
-                {% load socialaccount %}
-                {% providers_media_js %}
-                <p><a class="btn btn-primary btn-md" href="{% provider_login_url "facebook" %}">Login with Facebook</a></p>
-            </div>
-   </div>
-   <div class="row">
-      <div class='col-sm-6 col-xs-12'>
-         <h1>Runners</h1>
-         <h2>Find your photos</h2>
-         <a class="btn btn-primary btn-md" href="{% url 'runner' %}"><img src="http://placehold.it/300x200" width="100%"></a>
-      </div>
-      <div class='col-sm-6 col-xs-12'>
-         <h1>Photographers</h1>
-         <h2>Upload your photos</h2>
-         <a class="btn btn-primary btn-md" href="{% url 'photographer' %}">
-         <img src="http://placehold.it/300x200" width="100%">
-         </a>
-      </div>
-   </div>
-</div>
 {% endblock %}
