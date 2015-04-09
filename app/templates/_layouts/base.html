@@ -39,9 +39,14 @@
     <script src="{% static 'js/libs/modernizr-2.8.3.js' %}"></script>
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="{% static 'img/apple-icon.png' %}">
-    <link rel="icon" href="{% static 'img/favicon.ico' %}">
-
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'img/apple-touch-icon-144x144.png' %}" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{% static 'img/apple-touch-icon-152x152.png' %}" />
+    <link rel="icon" type="image/png" href="{% static 'img/favicon-32x32.png' %}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{% static 'img/favicon-16x16.png' %}" sizes="16x16" />
+    <meta name="application-name" content="42K"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="{% static 'img/mstile-144x144.png' %}" />
+    <!-- Google verification -->
     <meta name="google-site-verification" content="Y5YWjn_DaGEhL4RrRN6dxmlhFekvjlzF2hnGSwoDTbQ" />
 </head>
 
