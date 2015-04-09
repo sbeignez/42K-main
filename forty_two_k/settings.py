@@ -38,11 +38,10 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY', 'ziYXzHAcMWWU5TL+OnQ6YT
 # ================================================== #
 # Debug and Template Debug: DEV and TEST = True, STAGE and PROD = False
 #
-if ENV not in ("PROD", "STAGE"):
+if ENV in ("PROD", "STAGE"):
     DEBUG = TEMPLATE_DEBUG = False
 else:
     DEBUG = TEMPLATE_DEBUG = True
-
 
 # ================================================== #
 # Only from test. stage. and www. OR local
@@ -62,7 +61,7 @@ SERVER_EMAIL = "42k-server@trophee.co"
 ADMINS = (
     ('Leo', '42k-admin@trophee.co'),
 )
-if ENV == "ENV":
+if ENV == 'DEV':
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # ================================================== #

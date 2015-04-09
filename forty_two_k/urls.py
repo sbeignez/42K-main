@@ -18,4 +18,5 @@ urlpatterns = patterns(
     url('^payments/', include('payments.urls')),
 
     url(r'', include('app.urls')),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
