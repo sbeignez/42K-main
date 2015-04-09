@@ -28,6 +28,13 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 
+def handler400(request):
+    response = render_to_response('400.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 400
+    return response
+
+
 def handler404(request):
     response = render_to_response('404.html', {},
                                   context_instance=RequestContext(request))
@@ -40,6 +47,7 @@ def handler500(request):
                                   context_instance=RequestContext(request))
     response.status_code = 500
     return response
+
 
 def landing(request):
     return render(request, 'app/landing-page.html')
@@ -94,7 +102,6 @@ class OrdersView(generic.ListView):
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user.id)
-
 
 
 class UploadView(generic.TemplateView):
@@ -217,7 +224,6 @@ def upload_delete(request, pk):
     return JFUResponse(request, success)
 
 
-
 from django_tables2 import SingleTableView
 
 
@@ -251,7 +257,7 @@ class RunnerView(PagedFilteredTableView):
 
 
 @login_required
-def addRace(request):
+def add_race(request):
     if request.POST:
         name = request.POST['name']
         date = request.POST['date']

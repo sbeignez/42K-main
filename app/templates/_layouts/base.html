@@ -68,13 +68,12 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="{% url 'home' %}" alt="42K">42<sup>K</sup></a>
+                <a class="navbar-brand" href="{% url 'home' %}" alt="42K">42K</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li><a href="{%  url 'runner-overview' %}"><span class="glyphicon glyphicon-picture"></span> Runners</a></li>
-                    <li><a href="{% url 'photographer' %}"><span class="glyphicon glyphicon-camera"></span> Photographers</a></li>
+
 
                     <li class="dropdown"> <!-- USER DROP DOWN -->
                         {% if user.is_authenticated %}
@@ -84,12 +83,15 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{% url 'orders' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Orders</a></li>
+
                                 <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a> </li>
                                 <li><a href="{% url 'account_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                                 <li class="divider"></li>
-                                <li class="dropdown-header">Admin only:</li>
+                                <li class="dropdown-header">For testers:</li>
+                                <li><a href="{%  url 'runner-overview' %}"><span class="glyphicon glyphicon-picture"></span> Runners</a></li>
+                                <li><a href="{% url 'photographer' %}"><span class="glyphicon glyphicon-camera"></span> Photographers</a></li>
                                 <li><a href="{% url 'order' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Order page (direct)</a></li>
+                                <li><a href="{% url 'orders' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Orders</a></li>
                                 <li><a href="{% url 'tagger' %}"><span class="glyphicon glyphicon-tags"></span> Tagger</a></li>
                             </ul>
                         {% elif request %}

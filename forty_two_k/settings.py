@@ -62,7 +62,8 @@ SERVER_EMAIL = "42k-server@trophee.co"
 ADMINS = (
     ('Leo', '42k-admin@trophee.co'),
 )
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if ENV == "ENV":
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # ================================================== #
 # Application definition
@@ -205,17 +206,21 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 if ENV == 'DEV':
     STATIC_URL = 'static/'
     MEDIA_URL = '/media/'
+    # STATICFILES_DIRS = (
+    #     join(BASE_DIR, 'static'),
+    # )
+    DEFAULT_FILE_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    # STATICFILES_FINDERS = (
+    #    'django.contrib.staticfiles.finders.FileSystemFinder',
+    #    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # )
 else:
     DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
     STATICFILES_STORAGE = 'forty_two_k.custom_storages.StaticStorage'
     STATIC_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME_STATIC
     MEDIA_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME_MEDIA
-# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/home/media/media.lawrence.com/static/"
 
 # ================================================== #
 # Payments
@@ -264,5 +269,5 @@ LOGGING = {
     }
 }
 
-if ENV == 'DEV':
-    INSTALLED_APPS += 'debug_toolbar',
+# if ENV == 'DEV':
+#    INSTALLED_APPS += 'debug_toolbar',
