@@ -52,6 +52,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
+SITE_ID = 1
 
 # ================================================== #
 # Emails
@@ -163,14 +164,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "allauth.socialaccount.context_processors.socialaccount",
 )
 
+
+# ================================================== #
+# Auth
+#
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 )
-
-SITE_ID = 1
 
 
 # ================================================== #
@@ -203,7 +206,7 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 # Django-storage
 # dev serve locally
 if ENV == 'DEV':
-    STATIC_URL = 'static/'
+    STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
     # STATICFILES_DIRS = (
     #     join(BASE_DIR, 'static'),

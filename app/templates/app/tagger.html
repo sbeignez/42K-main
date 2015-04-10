@@ -1,17 +1,7 @@
   {% extends "_layouts/base.html" %}
   {% load staticfiles %}
 
-  {% block css %}
-  {{block.super}}
-  <style>
-   /* Move down content because we have a fixed navbar that is 50px tall */
-   body {
-     padding-top: 50px;
-     padding-bottom: 20px;
-   }
- </style>
- {% endblock css %}
- {% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
+ {% block page_title %}Tagger{% endblock %}
  {% block page_class %}home-page{% endblock %}
 
  {% block content %}

@@ -1,5 +1,6 @@
 {% load staticfiles %}
 <!doctype html>
+
 <!--[if lt IE 7]>      
 <html class="no-js lt-ie9 lt-ie8 lt-ie7">
    <![endif]-->
@@ -12,45 +13,51 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="en">
 <!--<![endif]-->
+
+{# === === HEAD === === #}
 <head>
     <meta charset="utf-8">
     <!-- Use the .htaccess and remove these lines to avoid edge case issues.
        More info: h5bp.com/i/378 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>{% block page_title %}42K Marathon photos{% endblock %}</title>
+    <title>42K: {% block page_title %}The runners photos community{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}{% endblock %}">
-    <meta name="author" content="{% block meta_author %}{% endblock %}">
+    <meta name="author" content="{% block meta_author %}Trophee Limited{% endblock %}">
     <!-- Mobile viewport optimized: h5bp.com/viewport -->
     <meta name="viewport" content="width=device-width">
-    {#  #}
     {% block meta %}{% endblock meta %}
+
+    {# === CSS === #}
     {# use the CDN to get bootstrap css. can not be inside compress css block #}
     {% block cdn_css %}
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
     {% endblock cdn_css %}
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
     <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-    <!-- CSS -->
     {% block css %}{% endblock css %}
     <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
     <!-- All JavaScript at the bottom, except this Modernizr build.
        Modernizr enables HTML5 elements & feature detects for optimal performance.
        Create your own custom Modernizr build: www.modernizr.com/download/ -->
     <script src="{% static 'js/libs/modernizr-2.8.3.js' %}"></script>
 
-    <!-- Favicons -->
+    {# === Favicons (cf. http://www.favicomatic.com/) === #}
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'img/apple-touch-icon-144x144.png' %}" />
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{% static 'img/apple-touch-icon-152x152.png' %}" />
     <link rel="icon" type="image/png" href="{% static 'img/favicon-32x32.png' %}" sizes="32x32" />
     <link rel="icon" type="image/png" href="{% static 'img/favicon-16x16.png' %}" sizes="16x16" />
+    <link rel="icon" href="{% static 'img/favicon.ico' %}"/>
     <meta name="application-name" content="42K"/>
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta name="msapplication-TileImage" content="{% static 'img/mstile-144x144.png' %}" />
-    <!-- Google verification -->
+
+    {# === Google verification === #}
     <meta name="google-site-verification" content="Y5YWjn_DaGEhL4RrRN6dxmlhFekvjlzF2hnGSwoDTbQ" />
 </head>
 
 
+{# === === BODY === === #}
 <body class="{% block body_class %}{% endblock %}" {% block body_attributes %}{% endblock %}>
 {% block body %}
     <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
@@ -112,14 +119,14 @@
         </div>
     </div>
 
-    <!-- Page ================================================== -->
+    {# Page ================================================== #}
     <div role="main">
         {% block content %}
 
         {% endblock %}
     </div>
 
-    <!-- Footer ================================================== -->
+    {# Footer ================================================== #}
     <footer class="footer" role="contentinfo">
         {% block footer %}
             <div class="container">
