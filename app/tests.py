@@ -7,6 +7,8 @@ from django.core.files.base import ContentFile
 from django.test import TestCase
 from django.utils.timezone import now
 
+from django.core.urlresolvers import reverse
+
 
 class MainTest(TestCase):
 
@@ -16,7 +18,7 @@ class MainTest(TestCase):
 
     def test_upload(self):
         # test get
-        r = self.client.get('/photographer/')
+        r = self.client.get(reverse('photographer'))
         self.assertContains(r, 'Add files')
 
     def test_js_upload(self):
@@ -24,7 +26,7 @@ class MainTest(TestCase):
             date=now(), submitted_by=self.user, validated_by=self.user)
         img = StringIO()
         Image.new('RGB', (1, 1)).save(img, format='jpeg')
-        r = self.client.post('/upload/', {
+        r = self.client.post(reverse('jfu_upload'), {
             'raceevent': race.pk, 'files[]': ContentFile(
                 img.getvalue(), name='test.jpg')})
         self.assertContains(r, '{')
