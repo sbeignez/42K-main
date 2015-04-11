@@ -80,13 +80,13 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="{% url 'home' %}" alt="42K">42K</a>
+                <a class="navbar-brand" href="{% block url-home %}{% url 'home' %}{%  endblock %}" alt="42K">42K</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
 
 
-
+                    {% block user-drop-down %}
                     <li class="dropdown"> <!-- USER DROP DOWN -->
                         {% if user.is_authenticated %}
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -102,7 +102,7 @@
                                 {% if 1 == 1 %}
                                 <li class="divider"></li>
                                 <li class="dropdown-header">For testers:</li>
-                                <li><a href="{% url 'photographer' %}"><span class="glyphicon glyphicon-camera"></span> Upload photos</a></li>
+                                <li><a href="{% url 'event-photos-add' %}"><span class="glyphicon glyphicon-camera"></span> Upload photos</a></li>
                                 <li><a href="{% url 'order' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Order page (direct)</a></li>
 
                                 <li class="divider"></li>
@@ -117,6 +117,7 @@
                             <a class="btn btn-primary btn-xs" href="{% provider_login_url "facebook" %}">Facebook log-in</a>
                         {% endif %}
                     </li>
+                    {% endblock user-drop-down %}
 
                 </ul>
             </div>

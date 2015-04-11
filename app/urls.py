@@ -69,14 +69,16 @@ urlpatterns = patterns(
     # ======================= #
     # Private links:
     url(r'^home/$', 'RunnerOverview', name='home'),
-    # todo: /event/
-    url(r'^event/add-photos/$', login_required(views.UploadView.as_view()), name='photographer'),
-    url(r'^event/tag-photos/', 'tag', name='tag'),
-    # todo /event/add-participants/
+    url(r'^event/(?P<race_id>[0-9]+)/$', 'event', name='event'),
+    url(r'^event/(?P<race_id>[0-9]+)/edit/$', 'event', name='event-edit'),  # todo
+    url(r'^event/(?P<race_id>[0-9]+)/follow/$', 'event', name='event-follow'),  # todo
+    url(r'^event/photos/add/$', login_required(views.UploadView.as_view()), name='event-photos-add'),
+    url(r'^event/photos/tag/', 'tag', name='tag'),
+    # todo /event/runner/add/
     # todo /event/runner/details/
     url(r'^event/runner/details/edit/$', 'RunnerInputbib', name='runner-inputbib'),
-    url(r'^event/search-event/$', login_required(views.RunnerView.as_view()), name='runner'),
-    url(r'^event/create-event/$', 'add_race', name='add_race'),
+    url(r'^event/find/$', login_required(views.RunnerView.as_view()), name='event-find'),
+    url(r'^event/create/$', 'EventCreate', name='event-create'),
     url(r'^event/photos/$', 'order', name='order'),
 
 

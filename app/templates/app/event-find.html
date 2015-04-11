@@ -1,25 +1,26 @@
 {% extends "_layouts/base.html" %}
 {% load staticfiles %}
+
 {% load render_table from django_tables2 %}
+
 {% block css %}
-    {{block.super}}
-
     <link rel="stylesheet"  href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
-
 {% endblock css %}
-{% block page_title %}42K.photos - Marathon photos made easy!{% endblock %}
-{% block page_class %}home-page{% endblock %}
+
+{% block page_title %}Find event{% endblock %}
+
+
 {% block content %}
     <div class="container">
 
         <div class="row">
-        <h1>Select your race</h1>
+        <h1>Find event</h1>
 
         {% load crispy_forms_tags %}
         <!-- RESULTS-->
 
         <div class="row">
-            <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+            <div class="col-xs-12">
                 {% crispy filter.form filter.form.helper %}
                 {% render_table table %}
                 <table class="table table-hover">
@@ -37,7 +38,7 @@
                             <td>{{race.date|date:"d F Y"}}</td>
                             <td>{{ race.city }}, {{ race.country.name }}</td>
                             <td>{{ race.name }}</td>
-                            <th><a href="{% url 'runner-inputbib' %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Select</a></th>
+                            <th><a href="{% url 'event-follow' race.id %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Follow</a></th>
                         </tr>
                     {% endfor %}
 
@@ -45,7 +46,7 @@
                 </table>
             </div>
             <div class="col-xs-12 col-sm-10 col-sm-offset-2">
-                Not in the list? <a href="#myModal" class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span> Add your race</a>
+                Not in the list? <a href="#myModal" class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span> Create new race</a>
             </div>
         </div>
         <!-- Modal HTML -->
@@ -63,6 +64,7 @@
                 </div>
             </div>
         </div>
+
+</div>
+</div>
 {% endblock content %}
-</div>
-</div>

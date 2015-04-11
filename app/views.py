@@ -21,6 +21,8 @@ from app.models import RaceEvent, Order, Photo, OrderItem
 from forty_two_k import settings
 from raceFuncs import RaceFilter, RaceTable
 
+from django.http import Http404
+
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -103,6 +105,13 @@ class TaggerView(generic.ListView):
 def tag(request):
     return render(request, 'app/tag.html')
 
+@login_required
+def event(request, race_id):
+    try:
+        race = RaceEvent.objects.get(pk=race_id)
+    except RaceEvent.DoesNotExist:
+        raise Http404("Race does not exist")
+    return render(request, 'app/event.html', {'race': race})
 
 class OrdersView(generic.ListView):
     template_name = 'app/orders.html'
@@ -116,7 +125,7 @@ class UploadView(generic.TemplateView):
     template_name = 'app/upload.html'
 
     def get_context_data(self, **kwargs):
-        context = super( UploadView, self ).get_context_data( **kwargs )
+        context = super(UploadView, self).get_context_data(**kwargs)
         context['accepted_mime_types'] = ['image/*']
         context['races'] = RaceEvent.objects.all()
         album = self.request.REQUEST.get('album')
@@ -256,7 +265,7 @@ class PagedFilteredTableView(SingleTableView):
 class RunnerView(PagedFilteredTableView):
     model = RaceEvent
     table_class = RaceTable
-    template_name = 'app/runner.html'
+    template_name = 'app/event-find.html'
     filter_class = RaceFilter
     formhelper_class = RaceListFormHelper
     formhelper_class.field_template = 'bootstrap3/layout/inline_field.html'
@@ -264,7 +273,7 @@ class RunnerView(PagedFilteredTableView):
 
 
 @login_required
-def add_race(request):
+def EventCreate(request):
     if request.POST:
         name = request.POST['name']
         date = request.POST['date']
@@ -275,3 +284,15 @@ def add_race(request):
 
         return redirect('runner')
 
+
+
+# def add_race(request):
+#     if request.POST:
+#         name = request.POST['name']
+#         date = request.POST['date']
+#         city = request.POST['city']
+#         country = request.POST['country']
+#
+#         RaceEvent.objects.create(name=name, date=date, city=city, country=country, submitted_by=request.user, validated_by=request.user)
+#
+#         return redirect('runner')

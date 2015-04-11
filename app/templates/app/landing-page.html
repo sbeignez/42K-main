@@ -1,6 +1,9 @@
 {% extends "_layouts/base.html" %}
 {% load staticfiles %}
 
+{% block url-home %}{% url 'landing' %}{% endblock %}
+{% block user-drop-down %}{% endblock %}
+
 {% block content %}
 
     <div class="jumbotron" style="background-image: url({% static 'img/marathon runner.jpg' %}); width:100%;height:100%;max-width:100%;background-position:center;background-size:cover;">
@@ -36,3 +39,5 @@
 </div>
 
 {% endblock %}
+
+{% block footer %}{% endblock %}

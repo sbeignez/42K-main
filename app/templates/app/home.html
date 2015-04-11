@@ -3,11 +3,41 @@
 
 {% block content %}
 
-    <div class="container">
-      <h1>Your races events <span class="badge">3</span></h1>
+<div class="container">
+    <h1>Home</h1>
+    <h2><small>Race events</small></h2>
+    <div class="row">
+        <div class="col-xs-6 col-sm-4 col-md-3">
+            {% for race in races %}
+                <div class="col-xs-6 col-sm-4 col-md-3">
+                    <div class="thumbnail">
+                        <a href="#" class="btn btn-primary">
+                        <img src="http://lorempixel.com/g/300/200/sports/9" width="100%" class="img-rounded"/>
+                        <div class="caption">
+                            <p>{{ race.name }}</p>
+                            <p>{{race.date|date:"d F Y"}}</p>
+                            <p>{{ race.city }}, {{ race.country.name }}</p>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
 
-        <h3><a href="/races/add/" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> ADD Race event</a></h3>
+            <div class="thumbnail">
+                <a href="{% url 'event-find' %}">
+                <img src="http://placehold.it/300x200/" width="100%" class="img-rounded"/>
+                <div class="caption">
+                    <p>Find races (marathon, 10K,..) to follow.</p>
+                    <p><a href="{% url 'event-find' %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right">Find race</span></a></p>
+                </div>
+                </a>
+            </div>
 
+        </div>
+    </div>
+</div>
+
+    <!--
       <div class="panel-group" id="accordion">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -184,8 +214,9 @@
           </div>
         </div>
       </div>
-        <h3><a href="{% url 'runner' %}" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> ADD Race event</a></h3>
-    </div>
+    -->
+
+
 
 
 

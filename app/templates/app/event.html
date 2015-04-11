@@ -1,0 +1,39 @@
+{% extends "_layouts/base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}Event details{% endblock %}
+
+
+{% block content %}
+    <div class='container'>
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Event</h1>
+                <h2>Details</h2>
+                <ul>
+                    <li>Name: {{ race.name }}</li>
+                    <li>Date: {{ race.date }}</li>
+                    <li>Location: {{ race.country }}, {{ race.city}}</li>
+                    <li>Page: <a href='{{ race.url }}'>{{ race.url }}</a></li>
+                    <li>Status: {{ race.status}}</li>
+                </ul>
+                <a href="{% url 'event-edit' race.id %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Edit race details</a>
+                <h2>Photos</h2>
+                * Photographers<br>
+                Photos...<br>
+
+                <a href="{% url 'event-photos-add' %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Add photos</a>
+                Tagging status
+                <a href="{% url 'tag' %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Tag</a>
+
+                <h2>Runners</h2>
+                Runners list<br>
+                <a href="{% url 'event-edit' race.id %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Upload participant list</a>
+                <a href="{% url 'event-edit' race.id %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Invite runner</a>
+
+                <h2>Supporters</h2>
+                Supporters list
+            </div>
+        </div>
+    </div>
+{% endblock %}
