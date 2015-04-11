@@ -18,7 +18,7 @@ class MainTest(TestCase):
 
     def test_upload(self):
         # test get
-        r = self.client.get(reverse('photographer'))
+        r = self.client.get(reverse('event-photos-add'))
         self.assertContains(r, 'Add files')
 
     def test_js_upload(self):
