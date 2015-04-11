@@ -10,6 +10,29 @@ from imagekit.processors import SmartResize
 # from geoposition.fields import GeopositionField
 from payments.models import BasePayment
 
+class RaceEvent(models.Model):
+    STATUSES = (
+        ('submitted', 'submitted'),
+        ('validated', 'validated'),
+        ('deleted', 'deleted'),
+    )
+    name = models.CharField(max_length=50)
+    date = models.DateTimeField()
+    url = models.URLField()
+    city = models.CharField(max_length=30)
+    country = CountryField()
+    bib_format = models.CharField(max_length=20)
+    submitted_by = models.ForeignKey(User, related_name='%(class)s_submitted_by')
+    validated_by = models.ForeignKey(User, related_name='%(class)s_validated_by')
+    status = models.CharField(max_length=10, choices=STATUSES)
+
+    def __unicode__(self):
+        return self.name
+
+    def get_photos(self):
+        photos = Photo.objects.filter(race=self)
+        for photo in photos:
+            yield photo
 
 class AppUser(models.Model):
     ROLES = (
@@ -20,6 +43,7 @@ class AppUser(models.Model):
     )
     user = models.OneToOneField(User, related_name='app')
     role = models.CharField(max_length=15, choices=ROLES, default='runner')
+    races = models.ManyToManyField(RaceEvent, through='RaceUser')
 
     @property
     def facebooktoken(self):
@@ -43,25 +67,10 @@ class AppUser(models.Model):
 User.app = property(lambda u: AppUser.objects.get_or_create(user=u)[0])
 
 
-class RaceEvent(models.Model):
-    STATUSES = (
-        ('submitted', 'submitted'),
-        ('validated', 'validated'),
-        ('deleted', 'deleted'),
-    )
-    name = models.CharField(max_length=50)
+class RaceUser(models.Model):
+    race = models.ForeignKey(RaceEvent, related_name='%(class)s_user')
+    user = models.ForeignKey(AppUser, related_name='%(class)s_user')
     date = models.DateTimeField()
-    url = models.URLField()
-    city = models.CharField(max_length=30)
-    country = CountryField()
-    bib_format = models.CharField(max_length=20)
-    submitted_by = models.ForeignKey(User, related_name='%(class)s_submitted_by')
-    validated_by = models.ForeignKey(User, related_name='%(class)s_validated_by')
-    status = models.CharField(max_length=10, choices=STATUSES)
-
-    def __unicode__(self):
-        return self.name
-
 
 class Photo(models.Model):
     file = models.ImageField(upload_to=MEDIA_ROOT, null=True, blank=True)
@@ -95,7 +104,7 @@ class Payment(BasePayment):
 class Order(models.Model):
     user = models.ForeignKey(User, related_name='%(class)s_user')
     payment = models.ForeignKey(Payment, related_name='%(class)s_payment')
-    items = models.ManyToManyField(Photo, through='OrderItem')
+    photos = models.ManyToManyField(Photo, through='OrderItem')
 
 
 class OrderItem(models.Model):
@@ -116,4 +125,4 @@ class Tag(models.Model):
     # tag_date
 
     def __unicode__(self):
-        return self.date + " " + self.bib
+        return self.bib

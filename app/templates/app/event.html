@@ -19,8 +19,12 @@
                 </ul>
                 <a href="{% url 'event-edit' race.id %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Edit race details</a>
                 <h2>Photos</h2>
+                Photos: count {{ race.get_photos.all.count }}
+                {% for photo in race.get_photos %}
+                    <img src="{% static photo.file.url %}" class="img-rounded" width="40" height="40">
+                {% endfor %}
+                <br>
                 * Photographers<br>
-                Photos...<br>
 
                 <a href="{% url 'event-photos-add' %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Add photos</a>
                 Tagging status

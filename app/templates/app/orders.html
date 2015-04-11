@@ -25,10 +25,10 @@
             <tr>
                 <td>{{ order.payment.modified }}</td>
                 <td>
-                    {% for item in order.items.all %}
-                        <img src="{{item.file.url}}" width="150px"> {{item.race}} / {{item}} <br><a href="#"> <span class="glyphicon glyphicon-download"></span> Download</a><br>
+                    {% for photo in order.photos.all %}
+                        <img src="{{ photo.file.url }}" width="150px"> {{ photo.race }} / {{ photo }} <br><a href="#"> <span class="glyphicon glyphicon-download"></span> Download</a><br>
                     {% endfor %}
-                <td>{{order.payment.total}} {{order.payment.currency}}</td>
+                <td>{{ order.payment.total }} {{ order.payment.currency }}</td>
             </tr>
               {% endif %}
           {% endfor %}

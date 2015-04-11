@@ -17,7 +17,7 @@ from jfu.http import upload_receive, UploadResponse, JFUResponse
 from payments import get_payment_model, RedirectNeeded
 
 from app.forms import RaceListFormHelper, NewRaceForm
-from app.models import RaceEvent, Order, Photo, OrderItem
+from app.models import RaceEvent, Order, Photo, OrderItem, AppUser
 from forty_two_k import settings
 from raceFuncs import RaceFilter, RaceTable
 
@@ -81,7 +81,8 @@ def login(request):
 
 @login_required
 def RunnerOverview(request):
-    return render(request, 'app/home.html')
+    appuser = request.user.app
+    return render(request, 'app/home.html', {'appuser': appuser})
 
 
 @login_required

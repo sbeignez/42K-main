@@ -7,22 +7,22 @@
     <h1>Home</h1>
     <h2><small>Race events</small></h2>
     <div class="row">
-        <div class="col-xs-6 col-sm-4 col-md-3">
-            {% for race in races %}
-                <div class="col-xs-6 col-sm-4 col-md-3">
-                    <div class="thumbnail">
-                        <a href="#" class="btn btn-primary">
-                        <img src="http://lorempixel.com/g/300/200/sports/9" width="100%" class="img-rounded"/>
-                        <div class="caption">
-                            <p>{{ race.name }}</p>
-                            <p>{{race.date|date:"d F Y"}}</p>
-                            <p>{{ race.city }}, {{ race.country.name }}</p>
-                        </div>
-                        </a>
+        {% for race in appuser.races.all %}
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="thumbnail">
+                    <a href="{% url 'event' race.id %}">
+                    <img src="http://lorempixel.com/g/300/200/sports/9" width="100%" class="img-rounded"/>
+                    <div class="caption">
+                        <p><b>{{ race.name }}</b></p>
+                        <p>{{ race.date|date:"d F Y"}}</p>
+                        <p>{{ race.city }}, {{ race.country.name }}</p>
+                        <p><a href="{% url 'event' race.id %}" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right">Details</span></a></p>
                     </div>
+                    </a>
                 </div>
-            {% endfor %}
-
+            </div>
+        {% endfor %}
+        <div class="col-xs-6 col-sm-4 col-md-3">
             <div class="thumbnail">
                 <a href="{% url 'event-find' %}">
                 <img src="http://placehold.it/300x200/" width="100%" class="img-rounded"/>
@@ -32,7 +32,6 @@
                 </div>
                 </a>
             </div>
-
         </div>
     </div>
 </div>
