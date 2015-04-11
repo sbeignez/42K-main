@@ -34,6 +34,9 @@ class AppUser(models.Model):
 
         return "http://www.gravatar.com/avatar/{}?s=40".format(hashlib.md5(self.user.email).hexdigest())
 
+    def is_admin(self):
+        return True
+
     def __unicode__(self):
         return self.user.username
 

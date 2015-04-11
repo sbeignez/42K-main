@@ -12,9 +12,10 @@ html {
 }
 
 body {
-	font-family: 'Ubuntu', sans-serif;
+	/* font-family: 'Ubuntu', sans-serif; */
+    /* background-color: #f79428; */
     /* Sticky-footer: Margin bottom by footer height */
-    margin-bottom: 100px;
+    margin-bottom: 250px;
 }
 
 h1 {
@@ -27,27 +28,25 @@ h2 {
 	color: #555555;
 }
 
+.navbar {
+    margin-bottom: 0px;
+}
+
 .navbar-inverse .navbar-brand {
 	font-family: 'Permanent Marker', sans-serif;
 	font-size: 250%;
-
 }
 
-.navbar-inverse {
-  /* background-color: #3b5998; */
-  /* border-color: #627AAD; */
-
-}
 
 .footer {
-    background-color: #555555;
-    color: white;
+    background-color: #444444;
+    color: #888888;
     /* Sticky-footer */
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 100px;
+    height: 250px;
 }
 
 .brand {
@@ -59,5 +58,11 @@ h2 {
 }
 
 .footer a {
-    color: #cccccc;
+    color: #bbbbbb;
+}
+
+.footer .footer-foot {
+    background-color: #222222;
+    color: #555555;
+    height: 30%;
 }

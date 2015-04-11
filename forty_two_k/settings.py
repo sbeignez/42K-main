@@ -180,7 +180,7 @@ AUTHENTICATION_BACKENDS = (
 # auth and allauth settings
 #
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/login/'
+LOGIN_URL = '/join/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_EMAIL_VERIFICATION = False
 SOCIALACCOUNT_PROVIDERS = {
@@ -199,7 +199,6 @@ SOCIALACCOUNT_PROVIDERS = {
 AWS_STORAGE_BUCKET_NAME_STATIC = "42k-static-%s" % ENV.lower()
 AWS_STORAGE_BUCKET_NAME_MEDIA = "42k-media-%s" % ENV.lower()
 
-# URLs ("https://DOMAIN/BUCKET/FOLDER")
 STATIC_ROOT = join(BASE_DIR, 'static')
 MEDIA_ROOT = join(BASE_DIR, 'media')
 
@@ -208,15 +207,8 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 if ENV == 'DEV':
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
-    # STATICFILES_DIRS = (
-    #     join(BASE_DIR, 'static'),
-    # )
     DEFAULT_FILE_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-    # STATICFILES_FINDERS = (
-    #    'django.contrib.staticfiles.finders.FileSystemFinder',
-    #    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # )
 else:
     DEFAULT_FILE_STORAGE = 'forty_two_k.custom_storages.MediaStorage'
     STATICFILES_STORAGE = 'forty_two_k.custom_storages.StaticStorage'

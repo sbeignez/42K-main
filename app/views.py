@@ -53,6 +53,10 @@ def landing(request):
     return render(request, 'app/landing-page.html')
 
 
+def join(request):
+    return render(request, 'app/join.html')
+
+
 def home(request):
     return render(request, 'app/home.html')
 
@@ -75,16 +79,20 @@ def login(request):
 
 @login_required
 def RunnerOverview(request):
-    return render(request, 'app/runner-overview.html')
+    return render(request, 'app/home.html')
 
 
 @login_required
 def RunnerInputbib(request):
     return render(request, 'app/runner-inputbib.html')
 
+@login_required
+def dashboard(request):
+    return render(request, 'app/dashboard.html')
+
 
 class TaggerView(generic.ListView):
-    template_name = 'app/tagger.html'
+    template_name = 'app/dash-tag.html'
     context_object_name = 'races'
 
     def get_queryset(self):
@@ -133,7 +141,7 @@ class UploadView(generic.TemplateView):
             'https://graph.facebook.com/%s/photos?access_token='
             % album + token))
         for p in photos['data']:
-            if self.request.REQUEST['upload-' + p['id']] == 'on':
+            if self.request.REQUEST.get('upload-' + p['id']) == 'on':
                 race = RaceEvent.objects.get(
                     pk=self.request.REQUEST['race-' + p['id']])
                 Photo.objects.create(file=ContentFile(urlopen(
@@ -178,9 +186,8 @@ def order(request):
         customer_ip_address='127.0.0.1')
     order = Order.objects.create(user=request.user, payment=payment)
 
-    for photo in photos:
-        OrderItem.objects.create(order=order, photo=photo, name=photo.file.path, sku='',
-                            quantity=1, price=Decimal(7), currency='USD')
+    # for photo in photos:
+        # OrderItem.objects.create(order=order, photo=photo, name=photo.file.path, sku='', quantity=1, price=Decimal(7), currency='USD')
 
     return order_details(request, payment_id=payment.id)
 
@@ -199,15 +206,15 @@ def upload(request):
     instance = Photo(file=file, race=raceevent)
     instance.save()
 
-    basename = os.path.basename( instance.file.path )
+    basename = os.path.basename(instance.file.path)
     file_dict = {
-        'name' : basename,
-        'size' : file.size,
+        'name': basename,
+        'size': file.size,
 
         'url': instance.file.url,
         'thumbnailUrl': instance.thumb.url,
 
-        'deleteUrl': reverse('jfu_delete', kwargs = { 'pk': instance.pk }),
+        'deleteUrl': reverse('jfu_delete', kwargs={'pk': instance.pk}),
         'deleteType': 'POST',
     }
 

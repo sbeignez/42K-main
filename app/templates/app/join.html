@@ -1,0 +1,59 @@
+{% extends "_layouts/base.html" %}
+{% load staticfiles %}
+
+
+{% block page_class %}home-page{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row clearfix">
+		<div class="col-xs-6 col-sm-4 column">
+			<img alt="" src="http://lorempixel.com/g/300/200/sports/9" class="img-thumbnail" />
+			<h2>
+				Heading
+			</h2>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				<a class="btn" href="#">View details »</a>
+			</p>
+		</div>
+		<div class="col-xs-6 col-sm-4 column">
+            <img alt="" src="http://lorempixel.com/g/300/200/sports/7" class="img-thumbnail" />
+			<h2>
+				Heading
+			</h2>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				<a class="btn" href="#">View details »</a>
+			</p>
+		</div>
+		<div class="col-xs-6 col-sm-4 column">
+            <img alt="" src="http://lorempixel.com/g/300/200/sports/3" class="img-thumbnail" />
+			<h2>
+				Heading
+			</h2>
+			<p>
+				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+			</p>
+			<p>
+				<a class="btn" href="#">View details »</a>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="row jumbotron">
+    <div class="container">
+        <div class='col-xs-12 col-sm-12'>
+            {% load socialaccount %}
+            {% providers_media_js %}
+            <a class="btn btn-primary btn-md" href="{% provider_login_url "facebook" %}">
+                Login with Facebook
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

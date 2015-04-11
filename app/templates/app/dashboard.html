@@ -1,0 +1,20 @@
+{% extends "_layouts/base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class='container'>
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Dashboard</h1>
+                    <ul>
+                        <li><a href="{% url 'dash-tag' %}">Tagging status</a></li>
+                        <li>New users</li>
+                        <li>Emails</li>
+                        <li>Uploads</li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
