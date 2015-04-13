@@ -34,6 +34,8 @@
     {% endblock cdn_css %}
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
     <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Syncopate:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
     {% block css %}{% endblock css %}
     <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
@@ -80,7 +82,9 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="{% block url-home %}{% url 'home' %}{%  endblock %}" alt="42K">42K</a>
+                <a class="navbar-brand" href="{% block url-home %}{% url 'home' %}{%  endblock %}" alt="42K" style="padding-top:07px">
+                    <img src="{% static 'img/42K-Logo-3x2-60.png' %}" alt="42K" >
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -138,8 +142,8 @@
             <div class="container">
             <div class="row">
                 <div class="col-xs-6 col-sm-3">
-                    <h3>About <b class="brand">42K</b></h3>
-                    <p>42K is a sharing photos community for runners and supporters.</p>
+                    <h3>About <b class="brand brand-42K">42K</b></h3>
+                    <p><b class="brand brand-42K">42K</b><b class="brand brand-photos">Photos</b> is a sharing photos community for runners and supporters.</p>
                     <p>Everybody can contribute by uploading photos, tagging, inviting friends and sharing.</p>
                 </div>
                 <div class="col-xs-6 col-sm-3">
@@ -148,6 +152,8 @@
                         <li><a href="{% url 'feedback' %}">Feedback</a></li>
                         <li><a href="{% url 'support' %}">Help & Support</a></li>
                         <li><a href="{% url 'terms' %}">Terms of service</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Media</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-6 col-sm-3">
@@ -183,7 +189,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
-                            42K Photos &copy; {% now "Y" %}. All rights reserved.
+                            <b class="brand brand-42K">42K</b><b class="brand brand-photos">Photos &copy;</b> {% now "Y" %}. All rights reserved.
                         </div>
                     </div>
                 </div>

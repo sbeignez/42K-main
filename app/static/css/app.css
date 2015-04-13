@@ -4,6 +4,11 @@
        url('http://fonts.googleapis.com/css?family=Permanent+Marker') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
+@font-face {
+    font-family: "Syncopate";
+    src: url('http://fonts.googleapis.com/css?family=Syncopate') format('woff');
+}
+
 
 html {
     /* Sticky-footer */
@@ -12,19 +17,20 @@ html {
 }
 
 body {
-	/* font-family: 'Ubuntu', sans-serif; */
+	font-family: 'Ubuntu', sans-serif;
     /* background-color: #f79428; */
     /* Sticky-footer: Margin bottom by footer height */
     margin-bottom: 250px;
 }
 
 h1 {
-	font-family: 'Permanent Marker', sans-serif;
+	font-family: 'Syncopate', sans-serif;
     color: #222222;
+    font-weight: bold;
 }
 
 h2 { 
-	font-family: 'Permanent Marker', sans-serif;
+	font-family: 'Syncopate', sans-serif;
 	color: #555555;
 }
 
@@ -49,12 +55,18 @@ h2 {
     height: 250px;
 }
 
-.brand {
+.brand-42K {
     font-family: 'Permanent Marker', sans-serif;
+    font-weight: normal;
 }
 
-.footer .brand {
-    color: white;
+.brand-photos {
+    font-family: 'Syncopate', sans-serif;
+    font-weight: normal;
+}
+
+.brand:hover {
+    color:#ffffff;
 }
 
 .footer a {
