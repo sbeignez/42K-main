@@ -1,0 +1,14 @@
+{% extends "_layouts/base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}Legal{% endblock %}
+{% block robots %}<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">{% endblock robots %}
+
+{% block content %}
+    <div class="container">
+        <h1>Legal</h1>
+        <h2><a href="{% url 'terms' %}">Terms of Service ("Terms")</a></h2>
+        <h2><a href="{% url 'privacy' %}">Privacy Policy</a></h2>
+        <h2><a href="{% url 'refunds' %}">Returns and Refunds Policy</a></h2>
+    </div>
+{% endblock %}

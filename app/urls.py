@@ -93,9 +93,15 @@ urlpatterns = patterns(
     # todo /user/settings/
 
     # Site links
-    url(r'^site/terms-of-service/$', 'terms', name='terms'),
+    url(r'^site/legal/$', 'legal', name='legal'),
+    url(r'^site/legal/terms-of-service/$', 'terms', name='terms'),
+    url(r'^site/legal/privacy/$', 'privacy', name='privacy'),
+    url(r'^site/legal/refunds/$', 'refunds', name='refunds'),
+    url(r'^site/terms-of-service/$', 'terms', name='terms'),  # depreciated
     url(r'^site/support/$', 'support', name='support'),
     url(r'^site/feedback/$', 'feedback', name='feedback'),
+    # url(r'^site/blog/$', 'blog', name='blog'),
+    url(r'^site/media/$', 'media', name='media'),
 
     # Admins links
     # todo: /dashboard/

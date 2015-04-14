@@ -26,6 +26,8 @@
     <!-- Mobile viewport optimized: h5bp.com/viewport -->
     <meta name="viewport" content="width=device-width">
     {% block meta %}{% endblock meta %}
+    {% block robots %}{% endblock robots %}
+
 
     {# === CSS === #}
     {# use the CDN to get bootstrap css. can not be inside compress css block #}
@@ -143,7 +145,7 @@
             <div class="row">
                 <div class="col-xs-6 col-sm-3">
                     <h3>About <b class="brand brand-42K">42K</b></h3>
-                    <p><b class="brand brand-42K">42K</b><b class="brand brand-photos">Photos</b> is a sharing photos community for runners and supporters.</p>
+                    <p><b class="brand"><b class="brand-42K">42K</b><b class="brand-photos">Photos</b></b> is a sharing photos community for runners and supporters.</p>
                     <p>Everybody can contribute by uploading photos, tagging, inviting friends and sharing.</p>
                 </div>
                 <div class="col-xs-6 col-sm-3">
@@ -151,20 +153,20 @@
                     <ul class="list-unstyled">
                         <li><a href="{% url 'feedback' %}">Feedback</a></li>
                         <li><a href="{% url 'support' %}">Help & Support</a></li>
-                        <li><a href="{% url 'terms' %}">Terms of service</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Media</a></li>
+                        <li><a href="{% url 'legal' %}">Legal</a></li>
+                        <li><a href="http://42kphotos.wordpress.com">Blog</a></li>
+                        <li><a href="{% url 'media' %}">Media</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-6 col-sm-3">
                     <h3>Social</h3>
                     <ul class="list-unstyled">
                         <li>E-mail: contact@42K.photos</li>
-                        <li>Facebook<a href="http://www.facebook.com/42Kphotos">/42Kphotos</a></li>
-                        <li>Google+: +42Kphotos</li>
-                        <li>Instagram: #42Kphotos</li>
-                        <li>Twitter: <a href="http://www.twitter.com/42Kphotos">@42Kphotos</a></li>
-                        <li>Pinterest<a href="http://www.pinterest.com/42Kphotos">/42Kphotos</a></li>
+                        <li><a href="http://www.facebook.com/42Kphotos">Facebook</a></li>
+                        <li><a href="http://plus.google.com/+42Kphotos">Google+</a></li>
+                        <li><a href="http://www.instagram.com/42Kphotos">Instagram</a></li>
+                        <li><a href="http://www.twitter.com/42Kphotos">Twitter</a></li>
+                        <li><a href="http://www.pinterest.com/42Kphotos">Pinterest</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-6 col-sm-3">
@@ -189,7 +191,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
-                            <b class="brand brand-42K">42K</b><b class="brand brand-photos">Photos &copy;</b> {% now "Y" %}. All rights reserved.
+                            <b class="brand"><b class="brand-42K">42K</b><b class="brand-photos">Photos</b></b> &copy; {% now "Y" %}. All rights reserved.
                         </div>
                     </div>
                 </div>

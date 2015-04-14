@@ -63,8 +63,20 @@ def home(request):
     return render(request, 'app/home.html')
 
 
+def legal(request):
+    return render(request, 'app/site-legal.html')
+
+
 def terms(request):
-    return render(request, 'app/tnc.html')
+    return render(request, 'app/site-legal-terms.html')
+
+
+def privacy(request):
+    return render(request, 'app/site-legal-privacy.html')
+
+
+def refunds(request):
+    return render(request, 'app/site-legal-refunds.html')
 
 
 def support(request):
@@ -73,6 +85,10 @@ def support(request):
 
 def feedback(request):
     return render(request, 'app/feedback.html')
+
+
+def media(request):
+    return render(request, 'app/site-media.html')
 
 
 def login(request):

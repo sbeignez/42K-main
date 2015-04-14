@@ -14,7 +14,7 @@
     <div class="container">
 
         <div class="row">
-        <h1>Find event</h1>
+        <h1>Find running event</h1>
 
         {% load crispy_forms_tags %}
         <!-- RESULTS-->
@@ -33,6 +33,18 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <tr class="info">
+                            <td><select class="form-control" id="">
+                                <option>April 2015</option>
+                                <option>May 2015</option>
+                                <option>June 2015</option>
+                                <option>July 2015</option>
+                              </select>
+                            </td>
+                            <td><input type="text" class="form-control" id="" placeholder="Country, City"></td>
+                            <td><input type="text" class="form-control" id="" placeholder="Search name"></td>
+                            <th></th>
+                        </tr>
                     {% for race in races %}
                         <tr>
                             <td>{{race.date|date:"d F Y"}}</td>
@@ -48,6 +60,7 @@
             <div class="col-xs-12 col-sm-10 col-sm-offset-2">
                 Not in the list? <a href="#myModal" class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span> Create new race</a>
             </div>
+        <br>
         </div>
         <!-- Modal HTML -->
         <div id="myModal" class="modal fade">
