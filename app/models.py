@@ -10,18 +10,22 @@ from imagekit.processors import SmartResize
 # from geoposition.fields import GeopositionField
 from payments.models import BasePayment
 
+
 class RaceEvent(models.Model):
     STATUSES = (
         ('submitted', 'submitted'),
         ('validated', 'validated'),
         ('deleted', 'deleted'),
     )
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
+    name_vo = models.CharField(max_length=100)
     date = models.DateTimeField()
     url = models.URLField()
     city = models.CharField(max_length=30)
     country = CountryField()
+    distance = models.CharField(max_length=20)
     bib_format = models.CharField(max_length=20)
+    # log and workflow
     submitted_by = models.ForeignKey(User, related_name='%(class)s_submitted_by')
     validated_by = models.ForeignKey(User, related_name='%(class)s_validated_by')
     status = models.CharField(max_length=10, choices=STATUSES)

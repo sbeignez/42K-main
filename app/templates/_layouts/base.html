@@ -105,7 +105,7 @@
                                 <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a> </li>
                                 <li><a href="{% url 'account_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 
-                                {% if 1 == 1 %}
+                                {% if user.app.role == 'admin' %}
                                 <li class="divider"></li>
                                 <li class="dropdown-header">For testers:</li>
                                 <li><a href="{% url 'event-photos-add' %}"><span class="glyphicon glyphicon-camera"></span> Upload photos</a></li>
@@ -163,7 +163,7 @@
                     <ul class="list-unstyled">
                         <li>E-mail: contact@42K.photos</li>
                         <li><a href="http://www.facebook.com/42Kphotos">Facebook</a></li>
-                        <li><a href="http://plus.google.com/+42Kphotos">Google+</a></li>
+                        <li><a href="http://www.google.com/+42Kphotos">Google+</a></li>
                         <li><a href="http://www.instagram.com/42Kphotos">Instagram</a></li>
                         <li><a href="http://www.twitter.com/42Kphotos">Twitter</a></li>
                         <li><a href="http://www.pinterest.com/42Kphotos">Pinterest</a></li>

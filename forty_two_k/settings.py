@@ -16,6 +16,8 @@ from os.path import dirname, join
 # ================================================== #
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = dirname(dirname(__file__))
+# SITE_URL
+SITE_DOMAIN = ".42kphotos.com"
 # ENV_NAME is set as environment variable in EB
 ENV = os.environ.get('ENV_NAME')
 if ENV not in ("PROD", "STAGE", "TEST"):
@@ -50,21 +52,18 @@ ALLOWED_HOSTS = [
     '.42-k.com',
     'localhost',
     '127.0.0.1',
-]
+] + [SITE_DOMAIN]
 
 # http://dryan.me/articles/elb-django-allowed-hosts/
 # http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 import requests
-
 EC2_PRIVATE_IP = None
 try:
     EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout=0.01).text
 except requests.exceptions.RequestException:
     pass
-
 if EC2_PRIVATE_IP:
     ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
-
 
 
 SITE_ID = 1
@@ -234,7 +233,7 @@ else:
 # ================================================== #
 # Payments
 # cf. django-payments
-PAYMENT_BASE_URL = 'http://www.42-k.com/'
+PAYMENT_BASE_URL = 'http://www.%s/' % SITE_DOMAIN
 PAYMENT_MODEL = 'app.Payment'
 
 if os.environ.get("STRIPE_SECRET_KEY"):
